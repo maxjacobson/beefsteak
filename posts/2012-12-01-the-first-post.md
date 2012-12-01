@@ -1,6 +1,6 @@
-## testing this little devblog thing
-
-Today is 2012-12-01, it's 6:20 AM
+title: testing this little devblog thing
+date: 2012-12-01
+time: 6:20 AM
 
 So it's like 6am and I guess I just made my first mini markdown blog engine.
 

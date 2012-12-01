@@ -1,6 +1,6 @@
-## Already updates
-
-It is 2012-12-01 at 7:36 AM
+title: Already updates
+date: 2012-12-01
+time: 7:36 AM
 
 **There are already updates** wow I am good.
 
