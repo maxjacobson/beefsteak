@@ -1,5 +1,4 @@
 def separate_metadata_and_text (text)
-  meta = Hash.new
   if text =~ /^title: .+$/
     title = text.match(/^title: .+$/)[0]
     title.gsub!(/title: /, '')
