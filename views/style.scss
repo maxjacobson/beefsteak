@@ -14,3 +14,9 @@ pre, code {
 #container {
   margin: 25px 0;
 }
+
+@media only screen and (max-width: 480px) {
+  body {
+    width: 100%;
+  }
+}

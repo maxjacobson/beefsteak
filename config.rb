@@ -7,3 +7,7 @@ end
 def get_subtitle
   your_homepages_subtitle = "home"
 end
+
+def get_author_name
+  your_name = "Max Jacobson"
+end
