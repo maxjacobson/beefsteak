@@ -29,7 +29,6 @@ get '/' do
       post_info = separate_metadata_and_text(the_text)
       post_info[:filename] = naked_filename
       to_sort.push(post_info)
-      # the_html << "    <li><a href=\"#{naked_filename}/\">#{post_info[:date]} - #{post_info[:time]} - #{post_info[:title]}</a></li>\n"
     end
   end
   
@@ -42,16 +41,12 @@ get '/' do
     if the_time =~ /PM|pm/
       sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
     end
-    puts sorter
     post[:sorter] = sorter
   end
-  
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
-  
   to_sort.each do |post|
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
   end
-  
   the_html << "  </ul>\n"
   erb the_html
 end
