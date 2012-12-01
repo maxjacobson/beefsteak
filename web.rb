@@ -77,8 +77,8 @@ get '/*.md' do
   naked_filename = params[:splat][0].to_s
   filepath = "posts/" + naked_filename + ".md"
   if File.exists?(filepath)
+    post_info = separate_metadata_and_text(File.read(filepath))
     the_text = File.read(filepath)
-    post_info = separate_metadata_and_text(the_text)
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
     @subtitle = "markdown source of " + post_info[:title]
