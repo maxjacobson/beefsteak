@@ -1,25 +1,25 @@
 def separate_metadata_and_text (text)
   meta = Hash.new
   if text =~ /^title: .+$/
-    meta[:title] = text.match(/^title: .+$/)[0]
-    meta[:title].gsub!(/title: /, '')
-    text.gsub!(/^title: .+$\n/, '')
+    title = text.match(/^title: .+$/)[0]
+    title.gsub!(/title: /, '')
+    text.sub!(/^title: .+$\n/, '')
   else
-    meta[:title] = "[Untitled Post]"
+    title = "[Untitled Post]"
   end
   if text =~ /^date: .+$/
-    meta[:date] = text.match(/^date: .+$/)[0]
-    meta[:date].gsub!(/date: /, '')
-    text.gsub!(/^date: .+$\n/, '')
+    date = text.match(/^date: .+$/)[0]
+    date.gsub!(/date: /, '')
+    text.sub!(/^date: .+$\n/, '')
   else
-    meta[:date] = "[No date info]"
+    date = "[No date info]"
   end
   if text =~ /^time: .+$/
-    meta[:time] = text.match(/^time: .+$/)[0]
-    meta[:time].gsub!(/time: /, '')
-    text.gsub!(/^time: .+$\n/, '')
+    time = text.match(/^time: .+$/)[0]
+    time.gsub!(/time: /, '')
+    text.sub!(/^time: .+$\n/, '')
   else
-    meta[:date] = "[No time info]"
+    time = "[No time info]"
   end
-  return { :metadata => meta, :text => text}
+  return { :text => text, :title => title, :date => date, :time => time }
 end

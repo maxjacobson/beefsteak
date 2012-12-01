@@ -3,54 +3,96 @@ require 'kramdown'
 require_relative 'config'
 require_relative 'helpers'
 
+not_found do
+  @title= get_title
+  @subtitle = "404"
+  erb :'404'
+end
+
+error do
+  @title= "Smash Cut"
+  @subtitle = "500"
+  erb :'500'
+end
+
 get '/' do
   @title = get_title
   @subtitle = get_subtitle
   the_html = String.new
+  to_sort = Array.new
   the_html << "  <ul>\n"
   posts = Dir.entries("posts")
   posts.each do |filename|
     if filename =~ /.md/
       naked_filename = filename.sub(/.md/,'')
       the_text = File.read("posts/" + filename)
-      both = separate_metadata_and_text(the_text)
-      body = both[:text]
-      meta = both[:metadata]
-      the_html << "    <li><a href=\"#{naked_filename}/\">#{meta[:date]} - #{meta[:time]} - #{meta[:title]}</a></li>\n"
+      post_info = separate_metadata_and_text(the_text)
+      post_info[:filename] = naked_filename
+      to_sort.push(post_info)
+      # the_html << "    <li><a href=\"#{naked_filename}/\">#{post_info[:date]} - #{post_info[:time]} - #{post_info[:title]}</a></li>\n"
     end
   end
+  
+  to_sort.each do |post|
+    the_date = post[:date]
+    the_time = post[:time]
+    if the_time =~ /AM|am/
+      sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
+    end
+    if the_time =~ /PM|pm/
+      sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+    end
+    puts sorter
+    post[:sorter] = sorter
+  end
+  
+  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
+  
+  to_sort.each do |post|
+    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+  end
+  
   the_html << "  </ul>\n"
   erb the_html
 end
 
 get '/*/' do
-  the_html = String.new
-  naked_filename = params[:splat][0].to_s
-  the_text = File.read("posts/" + naked_filename + ".md")
-  both = separate_metadata_and_text(the_text)
-  body = both[:text]
-  meta = both[:metadata]
-  the_html << "<h2>#{meta[:title]}</h2>\n"
-  the_html << "<h3>Posted on #{meta[:date]} at #{meta[:time]}</h3>"
-  the_html << Kramdown::Document.new(body).to_html + "\n"
-  the_html << "<a href=\"/#{naked_filename}.md\">Markdown source</a>\n"
   @title = get_title
-  @subtitle = meta[:title]
-  erb the_html
+  naked_filename = params[:splat][0].to_s
+  filepath = "posts/" + naked_filename + ".md"
+  if File.exists?(filepath)
+    the_html = String.new
+    the_text = File.read(filepath)
+    post_info = separate_metadata_and_text(the_text)
+    the_html << "<h2>#{post_info[:title]}</h2>\n"
+    the_html << "<h3>Posted on #{post_info[:date]} at #{post_info[:time]}</h3>"
+    the_html << Kramdown::Document.new(post_info[:text]).to_html + "\n"
+    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source</a>\n"
+    @subtitle = post_info[:title]
+    erb the_html
+  else
+    @error_page = naked_filename
+    @subtitle = "404"
+    erb :'404'
+  end
 end
 
 get '/*.md' do
-  naked_filename = params[:splat][0].to_s
-  filename = "posts/" + naked_filename + ".md"
-  the_text = File.read(filename)
-  both = separate_metadata_and_text(the_text)
-  body = both[:text]
-  meta = both[:metadata]
-  the_text.gsub!(/</, '&lt;')
-  the_text.gsub!(/>/,'&gt;')
   @title = get_title
-  @subtitle = "markdown source of " + meta[:title]
-  erb "<h2>Markdown source of <a href=\"#{naked_filename}/\">#{meta[:title]}</a></h2>\n\n<pre>\n" + the_text + "\n</pre>"
+  naked_filename = params[:splat][0].to_s
+  filepath = "posts/" + naked_filename + ".md"
+  if File.exists?(filepath)
+    the_text = File.read(filepath)
+    post_info = separate_metadata_and_text(the_text)
+    the_text.gsub!(/</, '&lt;')
+    the_text.gsub!(/>/,'&gt;')
+    @subtitle = "markdown source of " + post_info[:title]
+    erb "<h2>Markdown source of <a href=\"#{naked_filename}/\">#{post_info[:title]}</a></h2>\n\n<pre>\n" + the_text + "\n</pre>"
+  else
+    @error_page = naked_filename + ".md"
+    @subtitle = "404"
+    erb :'404'
+  end
 end
 
 get '/css/style.css' do
