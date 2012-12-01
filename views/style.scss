@@ -1,10 +1,12 @@
 body {
+  // set some basic style
   width: 600px;
   margin: 0 auto;
   font-family: sans-serif;
 }
 
 pre, code {
+  // make code blocks look ok
   background-color: pink;
   border-radius: 5px;
   padding: 2px;
@@ -12,11 +14,13 @@ pre, code {
 }
 
 #container {
+  // a little buffer on top and bottom
   margin: 25px 0;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 600px) {
   body {
+    // take up most of the width of the page
     width: 97%;
   }
 }
