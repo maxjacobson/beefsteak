@@ -31,10 +31,21 @@ body, html {
 }
 
 #container {
+  h1 {
+    margin: 0;
+  }
   // a little buffer on top and bottom
   margin: 25px 0;
   background-color: white;
   padding: 25px;
+  #author {
+    font-size: 80%;
+  }
+  #date {
+    background-color: grey;
+    color: white;
+    padding: 2px;
+  }
 }
 
 #searchbox {
@@ -45,5 +56,8 @@ body, html {
   body, html {
     // take up most of the width of the page
     width: 97%;
+  }
+  #container {
+    padding: 10px;
   }
 }

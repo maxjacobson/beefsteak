@@ -34,3 +34,11 @@ def get_email_address
   your_email_address = nil
   your_email_address = "max@maxjacobson.net"
 end
+
+def get_author_image_embed
+  # files need to go in the /public folder, which will be treated as the / folder for the site
+  # so this image is at /public/img/max.png but I'll assign the filename /img/max.png
+  # because that's how the site will understand it
+  filename = "/img/max.png"
+  return "<img src=\"#{filename}\" />"
+end

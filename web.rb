@@ -196,7 +196,7 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<p>Posted on #{post_info[:date]} at #{post_info[:time]}</p>"
+    the_html << "<p id=\"date\">Posted on #{post_info[:date]} at #{post_info[:time]}</p>"
     the_html << Kramdown::Document.new(post_info[:text]).to_html + "\n"
     the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
     if post_info[:tags_array].length > 0

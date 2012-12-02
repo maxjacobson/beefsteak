@@ -11,7 +11,8 @@
 </head>
 <body>
 <div id="container">
-<h1><a href ="/"><%= @title.downcase %></a> <small>by <%= get_author_name.downcase %></small></h1>
+<h1 id="title"><a href ="/"><%= @title.downcase %></a></h1>
+<h1 id="author">by <%= get_author_name.downcase %></h1>
 <h2><%= @subtitle.downcase %></h2>
 <%= yield %>
 <hr />
