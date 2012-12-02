@@ -10,7 +10,7 @@ not_found do
 end
 
 error do
-  @title= "Smash Cut"
+  @title= get_title
   @subtitle = "500"
   erb :'500'
 end
@@ -61,9 +61,7 @@ get '/' do
       sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
     end
     post[:sorter] = sorter
-    # post[:text] = nil
   end
-  puts to_sort
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
   to_sort.each do |post|
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
@@ -173,12 +171,11 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<h2>#{post_info[:title]}</h2>\n"
     the_html << "<h3>Posted on #{post_info[:date]} at #{post_info[:time]}</h3>"
     the_html << Kramdown::Document.new(post_info[:text]).to_html + "\n"
     the_html << "<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
     if post_info[:tags_array].length > 0
-      the_html << "<p>Tags:</p>"
+      the_html << "<p>Tags:</p>\n"
       the_html << "<ul>\n"
       post_info[:tags_array].each do |tag|
         the_html << "<li><a href=\"/tag/#{tag}\">#{tag}</a></li>\n"
@@ -205,7 +202,7 @@ get '/*.md' do
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
     @subtitle = "markdown source of " + post_info[:title]
-    erb "<h2>Markdown source of <a href=\"#{naked_filename}/\">#{post_info[:title]}</a></h2>\n\n<pre>\n" + the_text + "\n</pre>"
+    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}/\">Back to #{post_info[:title]}</a> post.</p>"
   else
     @error_page = naked_filename + ".md"
     @subtitle = "404"

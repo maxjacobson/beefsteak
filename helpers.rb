@@ -23,6 +23,7 @@ def separate_metadata_and_text (text)
   if text =~ /^category: .+$/
     category = text.match(/^category: .+$/)[0]
     category.gsub!(/category: /, '')
+    category.gsub!(/ /, '-')
     text.sub!(/^category: .+$\n/, '')
   else
     category = "[No time info]"
@@ -32,6 +33,9 @@ def separate_metadata_and_text (text)
     tags.gsub!(/tags: /, '')
     text.sub!(/^tags: .+$\n/, '')
     tags_array = tags.split(/, /)
+    tags_array.each do |t|
+      t.gsub!(/ /, '-')
+    end
   else
     category = "[No time info]"
   end
