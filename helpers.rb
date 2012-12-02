@@ -20,5 +20,20 @@ def separate_metadata_and_text (text)
   else
     time = "[No time info]"
   end
-  return { :text => text, :title => title, :date => date, :time => time }
+  if text =~ /^category: .+$/
+    category = text.match(/^category: .+$/)[0]
+    category.gsub!(/category: /, '')
+    text.sub!(/^category: .+$\n/, '')
+  else
+    category = "[No time info]"
+  end
+  if text =~ /^tags: .+$/
+    tags = text.match(/^tags: .+$/)[0]
+    tags.gsub!(/tags: /, '')
+    text.sub!(/^tags: .+$\n/, '')
+    tags_array = tags.split(/, /)
+  else
+    category = "[No time info]"
+  end
+  return { :text => text, :title => title, :date => date, :time => time, :category => category, :tags_array => tags_array }
 end

@@ -1,6 +1,8 @@
 title: Introducing myself to the command line
 date: 2012-02-26
 time: 12:00 PM
+category: coding
+tags: command-line, learning
 
 
 I never really understood how to use the command line. I kind of got it in principle but not in practice.
