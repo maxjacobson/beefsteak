@@ -207,7 +207,7 @@ get '/*/' do
       end
       the_html << "</ul>\n"
     end
-    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source</a>\n"
+    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source of this post</a>\n"
     @subtitle = post_info[:title]
     erb the_html
   else
@@ -248,7 +248,7 @@ get '/feed' do
   the_feed << "  <link>#{get_blog_address}</link>\n"
   the_feed << "  <description>#{get_blog_description}</description>\n"
   the_feed << "  <language>#{get_blog_language}</language>\n"
-  the_feed << "  <updated>2012-12-02T01:56:00Z</updated>" # hmmm this shouldnt be hardcoded
+  the_feed << "  <updated>#{Time.now}</updated>"
   if get_email_address != nil
     the_feed << "  <webMaster>#{get_email_address}</webMaster>\n"
   end
@@ -267,12 +267,10 @@ get '/feed' do
 
   sorted = sort_posts(to_sort) # method in helper.rb
   sorted.each do |post|
-    # the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
     the_feed << "  <item>\n"
     the_feed << "    <title>#{post[:title]}</title>\n"
     the_feed << "    <link>#{get_blog_address}#{post[:filename]}/</link>\n"
     the_feed << "    <description><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></description>\n"
-    # the_feed << "    <content type=\"html\" xml:base=\"#{get_blog_address}\" xml:lang=\"#{get_blog_language}\"><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></content>\n"
     if get_email_address != nil
       the_feed << "    <author><name>#{get_author_name}</name></author>\n"
     end

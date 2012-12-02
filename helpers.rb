@@ -49,6 +49,8 @@ def sort_posts (to_sort)
     if the_time =~ /AM|am/
       if the_time =~ /^[0-9]:/ # aka ONE digit before the colon
         sorter = the_date.gsub(/-/,'') + ("0" + the_time).gsub(/:| |AM|am/,'')
+      elsif the_time =~ /^12:/
+        sorter = the_date.gsub(/-/,'') + ("00" + the_time).gsub(/:| |AM|am|12/,'')
       else
         sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
       end
