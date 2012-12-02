@@ -30,14 +30,14 @@ get '/' do
       the_text = File.read("posts/" + filename)
       post_info = separate_metadata_and_text(the_text)
       post_info[:filename] = naked_filename
-      
+
       # populate category_cloud
       if category_cloud[post_info[:category]].nil?
         category_cloud[post_info[:category]] = 1
       else
         category_cloud[post_info[:category]] += 1
       end
-      
+
       # populate tag_cloud
       post_info[:tags_array].each do |tag|
         if tag_cloud[tag].nil?
@@ -46,29 +46,14 @@ get '/' do
           tag_cloud[tag] += 1
         end
       end
-      
+
       to_sort.push(post_info)
     end
   end
 
-  to_sort.each do |post|
-    the_date = post[:date]
-    the_time = post[:time]
-    if the_time =~ /AM|am/
-      sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
-    end
-    if the_time =~ /PM|pm/
-      if the_time =~ /12:/
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
-      else
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
-      end
-    end
-    post[:sorter] = sorter.to_i
-  end
-  
-  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}  
-  to_sort.each do |post|
+  sorted = sort_posts(to_sort) # method in helper.rb
+
+  sorted.each do |post|
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
   end
   the_html << "  </ul>\n"
@@ -108,23 +93,8 @@ get '/category/*' do
       to_sort.push(post_info)
     end
   end
-  to_sort.each do |post|
-    the_date = post[:date]
-    the_time = post[:time]
-    if the_time =~ /AM|am/
-      sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
-    end
-    if the_time =~ /PM|pm/
-      if the_time =~ /12:/
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
-      else
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
-      end
-    end
-    post[:sorter] = sorter.to_i
-  end
-  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
-  to_sort.each do |post|
+  sorted = sort_posts(to_sort) # method in helper.rb
+  sorted.each do |post|
     if the_category == post[:category]
       the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
     end
@@ -159,23 +129,8 @@ get '/tag/*' do
       to_sort.push(post_info)
     end
   end
-  to_sort.each do |post|
-    the_date = post[:date]
-    the_time = post[:time]
-    if the_time =~ /AM|am/
-      sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
-    end
-    if the_time =~ /PM|pm/
-      if the_time =~ /12:/
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
-      else
-        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
-      end
-    end
-    post[:sorter] = sorter.to_i
-  end
-  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
-  to_sort.each do |post|
+  sorted = sort_posts(to_sort) # method in helper.rb
+  sorted.each do |post|
     for t in 0...post[:tags_array].length
       if post[:tags_array][t] == the_tag
         the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"

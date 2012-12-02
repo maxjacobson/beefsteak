@@ -41,3 +41,41 @@ def separate_metadata_and_text (text)
   end
   return { :text => text, :title => title, :date => date, :time => time, :category => category, :tags_array => tags_array }
 end
+
+def sort_posts (to_sort)
+  to_sort.each do |post|
+    the_date = post[:date]
+    the_time = post[:time]
+    if the_time =~ /AM|am/
+      if the_time =~ /^[0-9]:/ # aka ONE digit before the colon
+        sorter = the_date.gsub(/-/,'') + ("0" + the_time).gsub(/:| |AM|am/,'')
+      else
+        sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
+      end
+    end
+    if the_time =~ /PM|pm/
+      if the_time =~ /12:/
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
+      else
+        if the_time =~ /^[0-9]:/ # aka ONE digit before the colon
+          sorter = the_date.gsub(/-/,'') + ((("0" + the_time).gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+        else
+          sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+        end
+      end
+    end
+    post[:sorter] = sorter.to_i
+  end
+  
+  # to_sort.each do |item|
+  #   puts item[:sorter]
+  # end
+  # 
+  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
+  # puts
+  # puts
+  # to_sort.each do |item|
+  #   puts item[:sorter]
+  # end
+  return to_sort
+end
