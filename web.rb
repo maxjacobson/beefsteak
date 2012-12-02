@@ -20,6 +20,8 @@ get '/' do
   @subtitle = get_subtitle
   the_html = String.new
   to_sort = Array.new
+  tag_cloud = Hash.new
+  category_cloud = Hash.new
   the_html << "  <ul>\n"
   posts = Dir.entries("posts")
   posts.each do |filename|
@@ -28,6 +30,23 @@ get '/' do
       the_text = File.read("posts/" + filename)
       post_info = separate_metadata_and_text(the_text)
       post_info[:filename] = naked_filename
+      
+      # populate category_cloud
+      if category_cloud[post_info[:category]].nil?
+        category_cloud[post_info[:category]] = 1
+      else
+        category_cloud[post_info[:category]] += 1
+      end
+      
+      # populate tag_cloud
+      post_info[:tags_array].each do |tag|
+        if tag_cloud[tag].nil?
+          tag_cloud[tag] = 1
+        else
+          tag_cloud[tag] += 1
+        end
+      end
+      
       to_sort.push(post_info)
     end
   end
@@ -42,12 +61,29 @@ get '/' do
       sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
     end
     post[:sorter] = sorter
+    # post[:text] = nil
   end
+  puts to_sort
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
   to_sort.each do |post|
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
   end
   the_html << "  </ul>\n"
+
+  the_html << "<p>Category cloud: "
+  category_cloud.each do |cat|
+    the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} (#{cat[1]})</a> "
+  end
+  the_html << "</p>\n"
+  
+  # tag_cloud.sort!
+  # put a tag cloud
+  the_html << "<p>Tag cloud: "
+  tag_cloud.each do |tag|
+    the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} (#{tag[1]})</a> "
+  end
+  the_html << "</p>\n"
+  
   erb the_html
 end
 
