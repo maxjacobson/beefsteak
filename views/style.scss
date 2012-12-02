@@ -1,25 +1,41 @@
-body {
+body, html {
   // set some basic style
   width: 600px;
   margin: 0 auto;
+  background-color: #498274;
   font-family: sans-serif;
-}
-
-pre, code {
-  // make code blocks look ok
-  background-color: pink;
-  border-radius: 5px;
-  padding: 2px;
-  overflow: auto;
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #823046;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  hr {
+      padding: 0;
+      border: none;
+      border-top: medium double #333;
+      color: #333;
+  }
+  pre, code {
+    // make code blocks look ok
+    background-color: pink;
+    border-radius: 5px;
+    padding: 2px;
+    overflow: auto;
+  }
 }
 
 #container {
   // a little buffer on top and bottom
   margin: 25px 0;
+  background-color: white;
+  padding: 25px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
+  body, html {
     // take up most of the width of the page
     width: 97%;
   }

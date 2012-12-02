@@ -50,7 +50,7 @@ get '/' do
       to_sort.push(post_info)
     end
   end
-  
+
   to_sort.each do |post|
     the_date = post[:date]
     the_time = post[:time]
@@ -58,35 +58,41 @@ get '/' do
       sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
     end
     if the_time =~ /PM|pm/
-      sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      if the_time =~ /12:/
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
+      else
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      end
     end
-    post[:sorter] = sorter
+    post[:sorter] = sorter.to_i
   end
-  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
+  
+  to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}  
   to_sort.each do |post|
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
   end
   the_html << "  </ul>\n"
 
-  the_html << "<p>Category cloud: "
+  the_html << "<p>categories: "
   category_cloud.each do |cat|
     the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} (#{cat[1]})</a> "
   end
   the_html << "</p>\n"
-  
-  # tag_cloud.sort!
-  # put a tag cloud
-  the_html << "<p>Tag cloud: "
+
+  the_html << "<p>tags: "
   tag_cloud.each do |tag|
     the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} (#{tag[1]})</a> "
   end
   the_html << "</p>\n"
-  
+
   erb the_html
 end
 
 get '/category/*' do
   the_category = params[:splat][0].to_s
+  if the_category == ""
+    redirect '/'
+  end
   @title = get_title
   @subtitle = "Category: #{the_category}"
   the_html = String.new
@@ -109,9 +115,13 @@ get '/category/*' do
       sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
     end
     if the_time =~ /PM|pm/
-      sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      if the_time =~ /12:/
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
+      else
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      end
     end
-    post[:sorter] = sorter
+    post[:sorter] = sorter.to_i
   end
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
   to_sort.each do |post|
@@ -120,11 +130,20 @@ get '/category/*' do
     end
   end
   the_html << "  </ul>\n"
-  erb the_html
+  if the_html =~ /<li>/
+    erb the_html
+  else
+    @subtitle = "404"
+    @error_page = "category/" + the_category
+    erb :'404'
+  end
 end
 
 get '/tag/*' do
   the_tag = params[:splat][0].to_s
+  if the_tag == ""
+    redirect '/'
+  end
   @title = get_title
   @subtitle = "Tag: #{the_tag}"
   the_html = String.new
@@ -147,9 +166,13 @@ get '/tag/*' do
       sorter = the_date.gsub(/-/,'') + the_time.gsub(/:| |AM|am/,'')
     end
     if the_time =~ /PM|pm/
-      sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      if the_time =~ /12:/
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i).to_s
+      else
+        sorter = the_date.gsub(/-/,'') + ((the_time.gsub(/:| |PM|pm/,'')).to_i + 1200).to_s
+      end
     end
-    post[:sorter] = sorter
+    post[:sorter] = sorter.to_i
   end
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
   to_sort.each do |post|
@@ -160,7 +183,13 @@ get '/tag/*' do
     end
   end
   the_html << "  </ul>\n"
-  erb the_html
+  if the_html =~ /<li>/
+    erb the_html
+  else
+    @subtitle = "404"
+    @error_page = "tag/" + the_tag
+    erb :'404'
+  end
 end
 
 get '/*/' do
@@ -171,12 +200,12 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<h3>Posted on #{post_info[:date]} at #{post_info[:time]}</h3>"
+    the_html << "<p>Posted on #{post_info[:date]} at #{post_info[:time]}</p>"
     the_html << Kramdown::Document.new(post_info[:text]).to_html + "\n"
-    the_html << "<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
+    the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
     if post_info[:tags_array].length > 0
       the_html << "<p>Tags:</p>\n"
-      the_html << "<ul>\n"
+      the_html << "<ul id=\"the-tags\">\n"
       post_info[:tags_array].each do |tag|
         the_html << "<li><a href=\"/tag/#{tag}\">#{tag}</a></li>\n"
       end
