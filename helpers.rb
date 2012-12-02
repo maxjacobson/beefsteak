@@ -79,3 +79,10 @@ def sort_posts (to_sort)
   # end
   return to_sort
 end
+
+def sort_cloud (to_sort)
+  # puts to_sort.inspect
+  sorted = to_sort.sort_by{|key, value| value}
+  # puts sorted.inspect
+  return sorted.reverse!
+end

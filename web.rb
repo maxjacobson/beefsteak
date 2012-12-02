@@ -59,13 +59,15 @@ get '/' do
   the_html << "  </ul>\n"
 
   the_html << "<p>categories: "
-  category_cloud.each do |cat|
+  sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
+  sorted_cats.each do |cat|
     the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} (#{cat[1]})</a> "
   end
   the_html << "</p>\n"
 
   the_html << "<p>tags: "
-  tag_cloud.each do |tag|
+  sorted_tags = sort_cloud(tag_cloud) # a method in helpers.rb
+  sorted_tags.each do |tag|
     the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} (#{tag[1]})</a> "
   end
   the_html << "</p>\n"
