@@ -1,7 +1,7 @@
 # hypothetically, if you're using this and you're not max jacobson, this is the only file you need to change to use this little blogging engine
 
 def get_title
-  your_blogs_name = "beefsteak &amp; aviation"
+  your_blogs_name = "Beefsteak &amp; Aviation"
 end
 
 def get_subtitle
