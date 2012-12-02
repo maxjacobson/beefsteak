@@ -15,6 +15,43 @@ error do
   erb :'500'
 end
 
+get '/search' do
+  @title = get_title
+  query = params[:q]
+
+  @title = get_title
+  the_html = String.new
+  to_sort = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
+        post_info = separate_metadata_and_text(the_text)
+        post_info[:filename] = naked_filename
+        to_sort.push(post_info)
+      end
+    end
+  end
+  if to_sort.length > 0
+    sorted = sort_posts(to_sort)
+    if sorted.length == 1
+      @subtitle = "There are #{sorted.length} search result for " + query
+    else
+      @subtitle = "There are #{sorted.length} search results for " + query
+    end
+    the_html << "<ul>\n"
+    sorted.each do |post|
+      the_html << "  <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+    end
+    the_html << "\n</ul>"
+  else
+    @subtitle = "No search results for " + query
+  end
+  erb the_html
+end
+
 get '/' do
   @title = get_title
   @subtitle = get_subtitle
@@ -57,6 +94,8 @@ get '/' do
     the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
   end
   the_html << "  </ul>\n"
+  
+  the_html << "<hr />\n"
 
   the_html << "<p>categories: "
   sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
