@@ -238,3 +238,49 @@ end
 get '/css/style.css' do
   scss :style
 end
+
+get '/feed' do
+  the_feed = String.new
+  the_feed << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n"
+  the_feed << "<rss version=\"2.0\">\n"
+  the_feed << "<channel>\n"
+  the_feed << "  <title>#{get_title}</title>\n"
+  the_feed << "  <link>#{get_blog_address}</link>\n"
+  the_feed << "  <description>#{get_blog_description}</description>\n"
+  the_feed << "  <language>#{get_blog_language}</language>\n"
+  if get_email_address != nil
+    the_feed << "  <webMaster>#{get_email_address}</webMaster>\n"
+  end
+  
+  to_sort = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      post_info = separate_metadata_and_text(the_text)
+      post_info[:filename] = naked_filename
+      to_sort.push(post_info)
+    end
+  end
+
+  sorted = sort_posts(to_sort) # method in helper.rb
+  sorted.each do |post|
+    # the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+    the_feed << "  <item>\n"
+    the_feed << "    <title>#{post[:title]}</title>\n"
+    the_feed << "    <link>#{get_blog_address}#{post[:filename]}/</link>\n"
+    the_feed << "    <description>#{get_blog_description}</description>\n"
+    the_feed << "    <content type=\"html\" xml:base=\"#{get_blog_address}\" xml:lang=\"#{get_blog_language}\"><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></content>\n"
+    if get_email_address != nil
+      the_feed << "    <author><name>#{get_author_name}</name><uri>#{get_blog_address}</uri></author>\n"
+    end
+    the_feed << "  </item>\n"
+  end
+
+  the_feed << "</channel>\n"
+  the_feed << "</rss>\n"
+  
+  content_type 'application/rss+xml'
+  the_feed
+end
