@@ -91,7 +91,7 @@ get '/' do
   sorted = sort_posts(to_sort) # method in helper.rb
 
   sorted.each do |post|
-    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted on #{post[:date]} at #{post[:time]}</small></li>\n"
   end
   the_html << "  </ul>\n"
   
@@ -99,15 +99,25 @@ get '/' do
 
   the_html << "<p>categories: "
   sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
+  i = 1
   sorted_cats.each do |cat|
-    the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} (#{cat[1]})</a> "
+    the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} <span class=\"badge\">(#{cat[1]})</span></a>"
+    if i != sorted_cats.length
+      the_html << ", "
+    end
+    i += 1
   end
   the_html << "</p>\n"
 
   the_html << "<p>tags: "
   sorted_tags = sort_cloud(tag_cloud) # a method in helpers.rb
+  i = 1
   sorted_tags.each do |tag|
-    the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} (#{tag[1]})</a> "
+    the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} <span class=\"badge\">(#{tag[1]})</span></a>"
+    if i != sorted_tags.length
+      the_html << ", "
+    end
+    i += 1
   end
   the_html << "</p>\n"
 
@@ -200,12 +210,16 @@ get '/*/' do
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
     the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
     if post_info[:tags_array].length > 0
-      the_html << "<p>Tags:</p>\n"
-      the_html << "<ul id=\"the-tags\">\n"
+      the_html << "<p>Tags: "
+      i = 1
       post_info[:tags_array].each do |tag|
-        the_html << "  <li><a href=\"/tag/#{tag}\">#{tag}</a></li>\n"
+        the_html << "<a href=\"/tag/#{tag}\">#{tag}</a>"
+        if i != post_info[:tags_array].length
+          the_html << ", "
+        end
+        i +=1
       end
-      the_html << "</ul>\n"
+      the_html << "</p>\n"
     end
     the_html << "<a href=\"/#{naked_filename}.md\">Markdown source of this post</a>\n"
     @subtitle = post_info[:title]

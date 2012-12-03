@@ -26,7 +26,10 @@ body, html {
     overflow: auto;
   }
   small {
-    font-size: 50%;
+    font-size: 60%;
+  }
+  ul {
+    list-style: circle;
   }
 }
 
@@ -50,6 +53,10 @@ body, html {
 
 #searchbox {
   margin-top: 25px;
+}
+
+.badge {
+  // for the tag/category count parens... could style... but dont know how to go about it
 }
 
 @media only screen and (max-width: 600px) {
