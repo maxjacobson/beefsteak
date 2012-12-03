@@ -1,26 +1,16 @@
-Super simple blogging engine. Follow the rules and it should be fun.
+# beefsteak
 
-* put your blog posts in a folder called "posts"
-* use the `.md` file extension
-* put your metadata at the top like I did it
+A simple blog on a simple blogging engine. Mine is online currently at <http://devblog.maxjacobson.net> and I guess it'll probably stay there.
 
-It looks like this:
+Just replace the contents of the `/posts` folder with your posts and the `config.rb` file with your info, and it should work.
 
-    title: title of your blog post
-    date: 2012-12-01
-    time: 8:27 AM
-    
-    and then your blog post goes here, with markdown syntax
-    
-these are just the ways I like them so that's how I'm making it work.
-
-* edit the `config.rb` file with the name of your blog as well as a subtitle (just leave it as "home" if you're not sure)
-* run `bundle install` to make sure you have the necessary gems to run this app
+* make sure you have ruby, rubygems, and bundler
+* run `bundle install` to get the necessary gems
 * now you can run `ruby web.rb` and see the site in your browser on port 4567 at <http://localhost:4567>
 * or run `shotgun web.rb` and find the site at <http://localhost:9393>
-    * shotgun is cool because you can make edits and you won't have to restart the app to see the changes
-    * if you don't have it, you may need to `gem install shotgun`
-* initialize a git repo (`git init`), add all the working files (`git add .`), commit your changes (`git commit -m 'first commit'`)
-* create a heroku app (`heroku create yourappname`), push to heroku (`git push heroku master`), and see if it works. if it does you can run `heroku open` to jump right to the site
 
-I mean this blogging engine ***SUCKS*** I just made it really fast and I don't know anything. Take it as is. Hope it serves you well.
+That's to run it locally. If you want to put it online install the heroku toolchain and put it on there. You'll need to know how to use git for that.
+
+## license or whatever
+
+Do whatever you want. It's as-is, etc.
