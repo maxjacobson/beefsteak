@@ -91,7 +91,7 @@ get '/' do
   sorted = sort_posts(to_sort) # method in helper.rb
 
   sorted.each do |post|
-    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:days_since]} days ago.</small></li>\n"
+    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
   end
   the_html << "  </ul>\n"
   
@@ -212,7 +212,7 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<p id=\"date\">Posted #{post_info[:days_since]} days ago on #{post_info[:date]} at #{post_info[:time]}</p>\n"
+    the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} on #{post_info[:date]} at #{post_info[:time]}</p>\n"
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
     the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
     if post_info[:tags_array].length > 0

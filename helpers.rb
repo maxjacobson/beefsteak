@@ -52,9 +52,38 @@ def separate_metadata_and_text (text)
   end
   time_now = Time.now
   time_then = Time.new(year, month, day, hour, min)
-  days_since = sprintf "%.1f", (time_now - time_then)/86400
+  diff = time_now - time_then
+  if diff < 0
+    relative_date = "in the future...?"
+  elsif diff < 60
+    relative_date = "less than a minute ago"
+  elsif diff < 3600
+    minutes = (diff/60).floor
+    if minutes == 1
+      relative_date = "#{minutes} minute ago"
+    else
+      relative_date = "#{minutes} minutes ago"
+    end
+  elsif diff < 86400
+    hours = (diff/3600).floor
+    if hours == 1
+      relative_date = "#{hours} hour ago"
+    else
+      relative_date = "#{hours} hours ago"
+    end
+  elsif diff < 31536000
+    days = (diff/86400).floor
+    if days == 1
+      relative_date = "#{days} day ago"
+    else
+      relative_date = "#{days} days ago"
+    end
+  else
+    relative_date = "more than a year ago"
+  end
+  # relative_date = sprintf "%.1f", (time_now - time_then)/86400
 
-  return { :text => text, :title => title, :date => date, :time => time, :days_since => days_since, :category => category, :tags_array => tags_array }
+  return { :text => text, :title => title, :date => date, :time => time, :relative_date => relative_date, :category => category, :tags_array => tags_array }
 end
 
 def sort_posts (to_sort)
