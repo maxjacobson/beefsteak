@@ -59,6 +59,14 @@ body, html {
   // for the tag/category count parens... could style... but dont know how to go about it
 }
 
+.vimeo {
+//  width: 100%;
+}
+img {
+  width: 100%;
+  margin: 20px 0;
+}
+
 @media only screen and (max-width: 600px) {
   body, html {
     // take up most of the width of the page
