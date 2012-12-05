@@ -81,14 +81,6 @@ get '/' do
     for i in first_post_of_current_page..last_post_of_current_page
       page_range[i] = true
     end
-    
-    puts
-    puts "current page: #{current_page}"
-    puts "posts per page: #{posts_per_page}"
-    puts "amount of pages: #{amount_of_pages}"
-    puts "page range: #{page_range}"
-    puts "amount of posts: #{amount_of_posts}"
-    
   else # if pagination is turned off
     page_range = Hash.new
     for i in 0...sorted.length

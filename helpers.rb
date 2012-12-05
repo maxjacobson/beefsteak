@@ -81,32 +81,9 @@ def separate_metadata_and_text (text)
   else
     relative_date = "more than a year ago"
   end
-
-  if month == "01"
-    month_word = "Jan"
-  elsif month == "02"
-    month_word = "Feb"
-  elsif month == "03"
-    month_word = "Mar"
-  elsif month == "04"
-    month_word = "Apr"
-  elsif month == "05"
-    month_word = "May"
-  elsif month == "06"
-    month_word = "Jun"
-  elsif month == "07"
-    month_word = "Jul"
-  elsif month == "08"
-    month_word = "Aug"
-  elsif month == "09"
-    month_word = "Sep"
-  elsif month == "10"
-    month_word = "Oct"
-  elsif month == "11"
-    month_word = "Nov"
-  elsif month == "12"
-    month_word = "Dec"
-  end
+  
+  the_months = {"01" => "jan", "02" => "feb", "03" => "mar", "04" => "apr", "05" => "may", "06" => "jun", "07" => "jul", "08" => "oct", "09" => "sep", "10" => "oct", "11" => "nov", "12" => "dec" }
+  month_word = the_months[month]
 
   return { :text => text, :title => title, :date => date, :time => time, :relative_date => relative_date, :month_word => month_word, :year => year, :month => month, :day => day, :category => category, :tags_array => tags_array }
 end
