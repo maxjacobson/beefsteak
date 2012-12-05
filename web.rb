@@ -91,7 +91,7 @@ get '/' do
   sorted = sort_posts(to_sort) # method in helper.rb
 
   sorted.each do |post|
-    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted on #{post[:date]} at #{post[:time]}</small></li>\n"
+    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:days_since]} days ago.</small></li>\n"
   end
   the_html << "  </ul>\n"
   
@@ -101,7 +101,10 @@ get '/' do
   sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
   i = 1
   sorted_cats.each do |cat|
-    the_html << "<a href=\"/category/#{cat[0]}\">#{cat[0]} <span class=\"badge\">(#{cat[1]})</span></a>"
+    the_category = cat[0]
+    the_category_unhyphenated = unhyphenate(the_category)
+    the_category_count = cat[1]
+    the_html << "<a href=\"/category/#{the_category}\">#{the_category_unhyphenated} <span class=\"badge\">(#{the_category_count})</span></a>"
     if i != sorted_cats.length
       the_html << ", "
     end
@@ -113,7 +116,10 @@ get '/' do
   sorted_tags = sort_cloud(tag_cloud) # a method in helpers.rb
   i = 1
   sorted_tags.each do |tag|
-    the_html << "<a href=\"/tag/#{tag[0]}\">#{tag[0]} <span class=\"badge\">(#{tag[1]})</span></a>"
+    the_tag = tag[0]
+    the_tag_unhyphenated = unhyphenate(the_tag)
+    the_tag_count = tag[1]
+    the_html << "<a href=\"/tag/#{the_tag}\">#{the_tag_unhyphenated} <span class=\"badge\">(#{the_tag_count})</span></a>"
     if i != sorted_tags.length
       the_html << ", "
     end
@@ -130,7 +136,7 @@ get '/category/*' do
     redirect '/'
   end
   @title = get_title
-  @subtitle = "Category: #{the_category}"
+  @subtitle = "Category: #{unhyphenate(the_category)}"
   the_html = String.new
   to_sort = Array.new
   the_html << "  <ul>\n"
@@ -166,7 +172,7 @@ get '/tag/*' do
     redirect '/'
   end
   @title = get_title
-  @subtitle = "Tag: #{the_tag}"
+  @subtitle = "Tag: #{unhyphenate(the_tag)}"
   the_html = String.new
   to_sort = Array.new
   the_html << "  <ul>\n"
@@ -206,14 +212,14 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<p id=\"date\">Posted on #{post_info[:date]} at #{post_info[:time]}</p>\n"
+    the_html << "<p id=\"date\">Posted #{post_info[:days_since]} days ago on #{post_info[:date]} at #{post_info[:time]}</p>\n"
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
-    the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{post_info[:category]}</a></p>"
+    the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
     if post_info[:tags_array].length > 0
       the_html << "<p>Tags: "
       i = 1
       post_info[:tags_array].each do |tag|
-        the_html << "<a href=\"/tag/#{tag}\">#{tag}</a>"
+        the_html << "<a href=\"/tag/#{tag}\">#{unhyphenate(tag)}</a>"
         if i != post_info[:tags_array].length
           the_html << ", "
         end

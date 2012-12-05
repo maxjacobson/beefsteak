@@ -14,3 +14,7 @@ That's to run it locally. If you want to put it online install the heroku toolch
 ## license or whatever
 
 Do whatever you want. It's as-is, etc.
+
+## todos?
+
+* be consistent re: the trailing slash... for posts its there but not for tag pages. hrm.

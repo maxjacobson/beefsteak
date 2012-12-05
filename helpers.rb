@@ -26,7 +26,7 @@ def separate_metadata_and_text (text)
     category.gsub!(/ /, '-')
     text.sub!(/^category: .+$\n/, '')
   else
-    category = "[No time info]"
+    category = "[No category info]"
   end
   if text =~ /^tags: .+$/
     tags = text.match(/^tags: .+$/)[0]
@@ -37,9 +37,24 @@ def separate_metadata_and_text (text)
       t.gsub!(/ /, '-')
     end
   else
-    category = "[No time info]"
+    tags = "[No tags info]"
   end
-  return { :text => text, :title => title, :date => date, :time => time, :category => category, :tags_array => tags_array }
+
+  date_reg = /(\d{4})-(\d{2})-(\d{2})/
+  time_reg = /(\d{1,2}):(\d{2}) ((AM|PM))/
+  year = date.match(date_reg)[1]
+  month = date.match(date_reg)[2]
+  day = date.match(date_reg)[3]
+  hour = time.match(time_reg)[1]
+  min = time.match(time_reg)[2]
+  if time.match(time_reg)[3] == "PM"
+    hour = (hour.to_i + 12).to_s
+  end
+  time_now = Time.now
+  time_then = Time.new(year, month, day, hour, min)
+  days_since = sprintf "%.1f", (time_now - time_then)/86400
+
+  return { :text => text, :title => title, :date => date, :time => time, :days_since => days_since, :category => category, :tags_array => tags_array }
 end
 
 def sort_posts (to_sort)
@@ -87,4 +102,10 @@ def sort_cloud (to_sort)
   sorted = to_sort.sort_by{|key, value| value}
   # puts sorted.inspect
   return sorted.reverse!
+end
+
+def unhyphenate (string)
+  unfrozen = string.dup
+  unfrozen.gsub!(/-/, ' ')
+  return unfrozen
 end
