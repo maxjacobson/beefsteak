@@ -2,7 +2,7 @@ title: seal attack
 date: 2012-12-04
 time: 10:52 PM
 category: video
-tags: seals, video, wildlife
+tags: seal, seals, video, wildlife, instagram, photos, photo
 
 a video from my travels:
 

@@ -43,7 +43,7 @@ get '/search' do
     end
     the_html << "<ul>\n"
     sorted.each do |post|
-      the_html << "  <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+      the_html << "  <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
     end
     the_html << "\n</ul>"
   else
@@ -153,7 +153,7 @@ get '/category/*' do
   sorted = sort_posts(to_sort) # method in helper.rb
   sorted.each do |post|
     if the_category == post[:category]
-      the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+      the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
     end
   end
   the_html << "  </ul>\n"
@@ -190,7 +190,7 @@ get '/tag/*' do
   sorted.each do |post|
     for t in 0...post[:tags_array].length
       if post[:tags_array][t] == the_tag
-        the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:date]} - #{post[:time]} - #{post[:title]}</a></li>\n"
+        the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
       end
     end
   end
