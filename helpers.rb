@@ -81,9 +81,34 @@ def separate_metadata_and_text (text)
   else
     relative_date = "more than a year ago"
   end
-  # relative_date = sprintf "%.1f", (time_now - time_then)/86400
 
-  return { :text => text, :title => title, :date => date, :time => time, :relative_date => relative_date, :category => category, :tags_array => tags_array }
+  if month == "01"
+    month_word = "Jan"
+  elsif month == "02"
+    month_word = "Feb"
+  elsif month == "03"
+    month_word = "Mar"
+  elsif month == "04"
+    month_word = "Apr"
+  elsif month == "05"
+    month_word = "May"
+  elsif month == "06"
+    month_word = "Jun"
+  elsif month == "07"
+    month_word = "Jul"
+  elsif month == "08"
+    month_word = "Aug"
+  elsif month == "09"
+    month_word = "Sep"
+  elsif month == "10"
+    month_word = "Oct"
+  elsif month == "11"
+    month_word = "Nov"
+  elsif month == "12"
+    month_word = "Dec"
+  end
+
+  return { :text => text, :title => title, :date => date, :time => time, :relative_date => relative_date, :month_word => month_word, :year => year, :month => month, :day => day, :category => category, :tags_array => tags_array }
 end
 
 def sort_posts (to_sort)

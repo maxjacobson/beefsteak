@@ -212,7 +212,7 @@ get '/*/' do
     the_html = String.new
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
-    the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} on #{post_info[:date]} at #{post_info[:time]}</p>\n"
+    the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} at #{post_info[:time]} on #{post_info[:month_word]} #{post_info[:day]}, #{post_info[:year]}</p>\n"
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
     the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
     if post_info[:tags_array].length > 0
