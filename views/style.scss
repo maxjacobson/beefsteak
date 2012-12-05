@@ -54,6 +54,13 @@ body, html {
 #searchbox {
   margin-top: 25px;
 }
+#pagelinks {
+  list-style: none;
+  li {
+    display: inline;
+    padding-right: 5px;
+  }
+}
 
 .badge {
   // for the tag/category count parens... could style... but dont know how to go about it

@@ -1,5 +1,26 @@
 # hypothetically, if you're using this and you're not max jacobson, this is the only file you need to change to use this little blogging engine
 
+def paginate?
+  # change to false to make the homepage display all posts
+  true
+end
+
+def get_posts_per_page
+  # if pagination is on, this is how many items will be on each page
+  posts_per_page = 20
+  return posts_per_page.to_f # needs to be a float for later calculations
+end
+
+def include_tag_cloud?
+  # change to false to disable the tag cloud
+  true
+end
+
+def include_cat_cloud?
+  # change to false to disable the category cloud
+  true
+end
+
 def get_title
   your_blogs_name = "Beefsteak &amp; Aviation"
 end

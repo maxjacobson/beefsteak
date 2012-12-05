@@ -3,6 +3,8 @@ require 'kramdown'
 require_relative 'config'
 require_relative 'helpers'
 
+enable :sessions
+
 not_found do
   @title= get_title
   @subtitle = "404"
@@ -15,46 +17,13 @@ error do
   erb :'500'
 end
 
-get '/search' do
-  @title = get_title
-  query = params[:q]
-
-  @title = get_title
-  the_html = String.new
-  to_sort = Array.new
-  posts = Dir.entries("posts")
-  posts.each do |filename|
-    if filename =~ /.md/
-      naked_filename = filename.sub(/.md/,'')
-      the_text = File.read("posts/" + filename)
-      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
-        post_info = separate_metadata_and_text(the_text)
-        post_info[:filename] = naked_filename
-        to_sort.push(post_info)
-      end
-    end
-  end
-  if to_sort.length > 0
-    sorted = sort_posts(to_sort)
-    if sorted.length == 1
-      @subtitle = "There are #{sorted.length} search result for " + query
-    else
-      @subtitle = "There are #{sorted.length} search results for " + query
-    end
-    the_html << "<ul>\n"
-    sorted.each do |post|
-      the_html << "  <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
-    end
-    the_html << "\n</ul>"
-  else
-    @subtitle = "No search results for " + query
-  end
-  erb the_html
+get '/css/style.css' do
+  scss :style
 end
 
 get '/' do
+  
   @title = get_title
-  @subtitle = get_subtitle
   the_html = String.new
   to_sort = Array.new
   tag_cloud = Hash.new
@@ -67,20 +36,24 @@ get '/' do
       the_text = File.read("posts/" + filename)
       post_info = separate_metadata_and_text(the_text)
       post_info[:filename] = naked_filename
-
-      # populate category_cloud
-      if category_cloud[post_info[:category]].nil?
-        category_cloud[post_info[:category]] = 1
-      else
-        category_cloud[post_info[:category]] += 1
-      end
-
-      # populate tag_cloud
-      post_info[:tags_array].each do |tag|
-        if tag_cloud[tag].nil?
-          tag_cloud[tag] = 1
+      
+      if include_cat_cloud?
+        # populate category_cloud
+        if category_cloud[post_info[:category]].nil?
+          category_cloud[post_info[:category]] = 1
         else
-          tag_cloud[tag] += 1
+          category_cloud[post_info[:category]] += 1
+        end
+      end
+      
+      if include_tag_cloud?
+        # populate tag_cloud
+        post_info[:tags_array].each do |tag|
+          if tag_cloud[tag].nil?
+            tag_cloud[tag] = 1
+          else
+            tag_cloud[tag] += 1
+          end
         end
       end
 
@@ -89,45 +62,117 @@ get '/' do
   end
 
   sorted = sort_posts(to_sort) # method in helper.rb
+  
+  
+  if paginate? # if pagination is turned on
+    if session[:current_page].nil? # if we dont know what page you're on
+      session[:current_page] = 1 # then start at page one
+    end
+    posts_per_page = get_posts_per_page
+    amount_of_posts = sorted.length
+    amount_of_pages = (amount_of_posts / posts_per_page).ceil
+    current_page = session[:current_page]
+    last_post_of_current_page = (current_page * posts_per_page).to_i
+    first_post_of_current_page = (last_post_of_current_page - posts_per_page).to_i + 1
+    if last_post_of_current_page > amount_of_posts
+      last_post_of_current_page = amount_of_posts
+    end
+    page_range = Hash.new
+    for i in first_post_of_current_page..last_post_of_current_page
+      page_range[i] = true
+    end
+    
+    puts
+    puts "current page: #{current_page}"
+    puts "posts per page: #{posts_per_page}"
+    puts "amount of pages: #{amount_of_pages}"
+    puts "page range: #{page_range}"
+    puts "amount of posts: #{amount_of_posts}"
+    
+  else # if pagination is turned off
+    page_range = Hash.new
+    for i in 0...sorted.length
+      page_range[i] = true
+    end
+  end
+  
+  if session[:current_page] > amount_of_pages
+    redirect '/page/1'
+  end
 
+  
+  temp_pagination_counter = 1
   sorted.each do |post|
-    the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
+    if page_range[temp_pagination_counter] == true
+      the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
+    end
+    temp_pagination_counter += 1
   end
   the_html << "  </ul>\n"
   
-  the_html << "<hr />\n"
-
-  the_html << "<p>categories: "
-  sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
-  i = 1
-  sorted_cats.each do |cat|
-    the_category = cat[0]
-    the_category_unhyphenated = unhyphenate(the_category)
-    the_category_count = cat[1]
-    the_html << "<a href=\"/category/#{the_category}\">#{the_category_unhyphenated} <span class=\"badge\">(#{the_category_count})</span></a>"
-    if i != sorted_cats.length
-      the_html << ", "
+  if paginate? and amount_of_pages > 1
+    @subtitle = "page #{current_page} (posts #{first_post_of_current_page}-#{last_post_of_current_page} of #{amount_of_posts})"
+    the_html << "<p>Pages: "
+    for i in 1..amount_of_pages
+      if i != current_page
+        the_html << "<a href=\"/page/#{i}\">#{i}</a>"
+      else
+        the_html << "<a href=\"#\">#{i}</a>"
+      end
+      if i != amount_of_pages
+        the_html << ", "
+      end
     end
-    i += 1
+    the_html << "</p>\n"
+  else
+    @subtitle = get_subtitle
   end
-  the_html << "</p>\n"
+  
+  if include_cat_cloud? or include_tag_cloud?
+    the_html << "<hr />\n"
+  end
 
-  the_html << "<p>tags: "
-  sorted_tags = sort_cloud(tag_cloud) # a method in helpers.rb
-  i = 1
-  sorted_tags.each do |tag|
-    the_tag = tag[0]
-    the_tag_unhyphenated = unhyphenate(the_tag)
-    the_tag_count = tag[1]
-    the_html << "<a href=\"/tag/#{the_tag}\">#{the_tag_unhyphenated} <span class=\"badge\">(#{the_tag_count})</span></a>"
-    if i != sorted_tags.length
-      the_html << ", "
+  if include_cat_cloud?
+    the_html << "<p>categories: "
+    sorted_cats = sort_cloud(category_cloud) # a method in helpers.rb
+    i = 1
+    sorted_cats.each do |cat|
+      the_category = cat[0]
+      the_category_unhyphenated = unhyphenate(the_category)
+      the_category_count = cat[1]
+      the_html << "<a href=\"/category/#{the_category}\">#{the_category_unhyphenated} <span class=\"badge\">(#{the_category_count})</span></a>"
+      if i != sorted_cats.length
+        the_html << ", "
+      end
+      i += 1
     end
-    i += 1
+    the_html << "</p>\n"
   end
-  the_html << "</p>\n"
+
+
+  if include_tag_cloud?
+    the_html << "<p>tags: "
+    sorted_tags = sort_cloud(tag_cloud) # a method in helpers.rb
+    i = 1
+    sorted_tags.each do |tag|
+      the_tag = tag[0]
+      the_tag_unhyphenated = unhyphenate(the_tag)
+      the_tag_count = tag[1]
+      the_html << "<a href=\"/tag/#{the_tag}\">#{the_tag_unhyphenated} <span class=\"badge\">(#{the_tag_count})</span></a>"
+      if i != sorted_tags.length
+        the_html << ", "
+      end
+      i += 1
+    end
+    the_html << "</p>\n"
+  end
 
   erb the_html
+end
+
+get '/page/:num' do
+  session[:current_page] = params[:num].to_i
+  redirect '/'
 end
 
 get '/category/*' do
@@ -153,7 +198,7 @@ get '/category/*' do
   sorted = sort_posts(to_sort) # method in helper.rb
   sorted.each do |post|
     if the_category == post[:category]
-      the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
+      the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
     end
   end
   the_html << "  </ul>\n"
@@ -190,7 +235,7 @@ get '/tag/*' do
   sorted.each do |post|
     for t in 0...post[:tags_array].length
       if post[:tags_array][t] == the_tag
-        the_html << "    <li><a href=\"#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
+        the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
       end
     end
   end
@@ -255,8 +300,41 @@ get '/*.md' do
   end
 end
 
-get '/css/style.css' do
-  scss :style
+get '/search' do
+  @title = get_title
+  query = params[:q]
+
+  @title = get_title
+  the_html = String.new
+  to_sort = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
+        post_info = separate_metadata_and_text(the_text)
+        post_info[:filename] = naked_filename
+        to_sort.push(post_info)
+      end
+    end
+  end
+  if to_sort.length > 0
+    sorted = sort_posts(to_sort)
+    if sorted.length == 1
+      @subtitle = "There are #{sorted.length} search result for " + query
+    else
+      @subtitle = "There are #{sorted.length} search results for " + query
+    end
+    the_html << "<ul>\n"
+    sorted.each do |post|
+      the_html << "  <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]}.</small></li>\n"
+    end
+    the_html << "\n</ul>"
+  else
+    @subtitle = "No search results for " + query
+  end
+  erb the_html
 end
 
 get '/feed' do
