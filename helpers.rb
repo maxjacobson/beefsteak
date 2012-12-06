@@ -1,3 +1,44 @@
+def secs_to_str (n)
+  if n < 0
+    return "in the future...?"
+  elsif n < 60
+    if n == 1
+      return "1 second"
+    else
+      return "#{n} seconds"
+    end
+  elsif n < 3600
+    minutes = (n/60).floor
+    if minutes == 1
+      return "#{minutes} minute"
+    else
+      return "#{minutes} minutes"
+    end
+  elsif n < 86400
+    hours = (n/3600).floor
+    if hours == 1
+      return "#{hours} hour"
+    else
+      return "#{hours} hours"
+    end
+  elsif n < 31536000
+    days = (n/86400).floor
+    if days == 1
+      return "#{days} day"
+    else
+      return "#{days} days"
+    end
+  else
+    years = (n/31536000).floor
+    secs_spillover = n % 31536000
+    if years == 1
+      return "1 year and #{secs_to_str(secs_spillover)}"
+    else
+      return "#{years} years and #{secs_to_str(secs_spillover)}"
+    end
+  end
+end
+
 def separate_metadata_and_text (text)
   if text =~ /^title: .+$/
     title = text.match(/^title: .+$/)[0]
@@ -53,39 +94,11 @@ def separate_metadata_and_text (text)
   time_now = Time.now
   time_then = Time.new(year, month, day, hour, min)
   diff = time_now - time_then
-  if diff < 0
-    relative_date = "in the future...?"
-  elsif diff < 60
-    relative_date = "less than a minute ago"
-  elsif diff < 3600
-    minutes = (diff/60).floor
-    if minutes == 1
-      relative_date = "#{minutes} minute ago"
-    else
-      relative_date = "#{minutes} minutes ago"
-    end
-  elsif diff < 86400
-    hours = (diff/3600).floor
-    if hours == 1
-      relative_date = "#{hours} hour ago"
-    else
-      relative_date = "#{hours} hours ago"
-    end
-  elsif diff < 31536000
-    days = (diff/86400).floor
-    if days == 1
-      relative_date = "#{days} day ago"
-    else
-      relative_date = "#{days} days ago"
-    end
-  else
-    relative_date = "more than a year ago"
-  end
-  
+
   the_months = {"01" => "jan", "02" => "feb", "03" => "mar", "04" => "apr", "05" => "may", "06" => "jun", "07" => "jul", "08" => "oct", "09" => "sep", "10" => "oct", "11" => "nov", "12" => "dec" }
   month_word = the_months[month]
 
-  return { :text => text, :title => title, :date => date, :time => time, :relative_date => relative_date, :month_word => month_word, :year => year, :month => month, :day => day, :category => category, :tags_array => tags_array }
+  return { :text => text, :title => title, :date => date, :time => time, :relative_date => secs_to_str(diff), :month_word => month_word, :year => year, :month => month, :day => day, :category => category, :tags_array => tags_array }
 end
 
 def sort_posts (to_sort)

@@ -1,6 +1,6 @@
 title: going open source
 date: 2012-12-02
-time: 9:58 PM
+time: 6:58 PM
 category: coding
 tags: devblog, github, open source, san diego, pinboard, gems
 

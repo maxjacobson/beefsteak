@@ -1,6 +1,6 @@
 title: RSS is hard to implement and I'm not sure I'm doing it right
-date: 2012-12-02
-time: 2:07 AM
+date: 2012-12-01
+time: 11:07 PM
 category: coding
 tags: rss, devblog, xml
 
