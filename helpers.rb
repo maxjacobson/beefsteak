@@ -3,16 +3,16 @@ def get_pages_for_header
   pages = Dir.entries("pages")
   pages.sort!
   if pages.length > 2
-    the_html << "<ul id = \"pages_list\">"
+    the_html << "<div class=\"pages_list\"><ul>\n"
     pages.each do |filename|
       if filename =~ /.md/
         naked_filename = filename.sub(/.md/,'')
         the_text = File.read("pages/#{filename}")
         page_info = separate_page_info(the_text)
-        the_html << "<li><a href=\"/~#{naked_filename}\">#{page_info[:title]}</a></li>"
+        the_html << "  <li><a href=\"/~#{naked_filename}\">#{page_info[:title]}</a></li>\n"
       end
     end
-    the_html << "</ul>\n"
+    the_html << "</ul>\n</div>\n"
   end
   return the_html
 end

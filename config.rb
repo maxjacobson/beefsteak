@@ -2,7 +2,7 @@
 
 def paginate?
   # change to false to make the homepage display all posts
-  true
+  false
 end
 
 def get_posts_per_page

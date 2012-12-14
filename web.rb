@@ -56,7 +56,7 @@ get '/' do
   tag_cloud = Hash.new
   category_cloud = Hash.new
 
-  the_html << "<ul>\n"
+  the_html << "<ul id=\"posts_lists\">\n"
   posts = Dir.entries("posts")
   posts.each do |filename|
     if filename =~ /.md/
@@ -116,8 +116,11 @@ get '/' do
     end
   end
 
-  if session[:current_page] > amount_of_pages
-    redirect '/page/1'
+  if amount_of_pages.nil?
+  else
+    if session[:current_page] > amount_of_pages
+      redirect '/page/1'
+    end
   end
 
 
@@ -222,7 +225,7 @@ get '/category/:category' do
     end
   end
   the_html << "  </ul>\n"
-  the_html << "  <p><a href=\"/category/#{the_category}/feed\">get the RSS feed for the #{the_category} category</a></p>\n"
+  the_html << "  <p><a href=\"/category/#{the_category}/feed\">get the RSS feed for the #{unhyphenate(the_category)} category</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -261,7 +264,7 @@ get '/tag/:tag' do
     end
   end
   the_html << "  </ul>\n"
-  the_html << "  <p><a href=\"/tag/#{the_tag}/feed\">get the RSS feed for the #{the_tag} tag</a></p>\n"
+  the_html << "  <p><a href=\"/tag/#{the_tag}/feed\">get the RSS feed for the #{unhyphenate(the_tag)} tag</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -354,7 +357,7 @@ get '/search' do
   else
     @subtitle = "No search results for " + query
   end
-  the_html << "<p><a href=\"/search/#{query}/feed\">get the RSS feed for the search: #{query}</a></p>\n"
+  the_html << "<p><a href=\"/search/#{query}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
   erb the_html
 end
 

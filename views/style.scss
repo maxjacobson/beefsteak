@@ -18,6 +18,10 @@ body, html {
       border-top: medium double #333;
       color: #333;
   }
+  img {
+    width: 100%;
+    margin: 20px 0;
+  }
   pre, code {
     // make code blocks look ok
     background-color: pink;
@@ -30,17 +34,18 @@ body, html {
   }
   ul {
     list-style: circle;
+    margin-left: 0;
+    padding-left: 15px;
   }
-}
-
-#container {
   h1 {
     margin: 0;
   }
-  // a little buffer on top and bottom
-  margin: 25px 0;
-  background-color: white;
-  padding: 25px;
+  #container {
+    // a little buffer on top and bottom
+    margin: 25px 0;
+    background-color: white;
+    padding: 25px;
+  }
   #author {
     font-size: 80%;
   }
@@ -49,45 +54,27 @@ body, html {
     color: white;
     padding: 2px;
   }
-}
-
-#pages_list {
-  li {
-    display: inline;
-    list-style-type: none;
-    margin-right: 10px;
+  .pages_list {
+    ul {
+      list-style: none;
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+    li {
+      display: inline;
+      margin-right: 5px;
+    }
   }
-  a {
-    padding: 2px;
+  #searchbox {
+    margin-top: 25px;
   }
-  a:hover {
-    border-radius: 2px;
+  .badge {
+    // for the tag/category count parens... could style... but dont know how to go about it
   }
-}
-
-#searchbox {
-  margin-top: 25px;
-}
-
-#pagelinks {
-  //is this targeting anything?
-  list-style: none;
-  li {
-    display: inline;
-    padding-right: 5px;
+  .vimeo {
+  //  width: 100%;
   }
-}
-
-.badge {
-  // for the tag/category count parens... could style... but dont know how to go about it
-}
-
-.vimeo {
-//  width: 100%;
-}
-img {
-  width: 100%;
-  margin: 20px 0;
 }
 
 @media only screen and (max-width: 600px) {
