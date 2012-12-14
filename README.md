@@ -18,3 +18,4 @@ Do whatever you want. It's as-is, etc.
 ## todos?
 
 * be consistent re: the trailing slash... for posts its there but not for tag pages. hrm.
+* if the date for something is in the future, don't show it
