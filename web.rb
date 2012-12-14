@@ -373,8 +373,8 @@ get '/feed' do
       to_sort.push(post_info)
     end
   end
-  sorted = sort_posts(to_sort) # method in helper.rb
-  the_feed = make_feed_from_posts(sorted)
+  the_posts = sort_posts(to_sort) # method in helper.rb
+  the_feed = make_feed_from_posts({:posts => the_posts})
   content_type 'application/rss+xml'
   the_feed
 end
