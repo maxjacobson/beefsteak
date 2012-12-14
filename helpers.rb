@@ -132,6 +132,7 @@ def separate_metadata_and_text (text)
     category = text.match(/^category: .+$/)[0]
     category.gsub!(/category: /, '')
     category.gsub!(/ /, '-')
+    category.downcase!
     text.sub!(/^category: .+$\n/, '')
   else
     category = "[No category info]"
@@ -143,6 +144,7 @@ def separate_metadata_and_text (text)
     tags_array = tags.split(/, /)
     tags_array.each do |t|
       t.gsub!(/ /, '-')
+      t.downcase!
     end
   else
     tags = "[No tags info]"

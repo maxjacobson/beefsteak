@@ -452,4 +452,3 @@ get '/search/*/feed' do
   content_type 'application/rss+xml'
   the_feed
 end
-# consider adding a feed for searches too...? or is that stupid?

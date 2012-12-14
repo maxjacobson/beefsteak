@@ -13,10 +13,10 @@ body, html {
     text-decoration: underline;
   }
   hr {
-      padding: 0;
-      border: none;
-      border-top: medium double #333;
-      color: #333;
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
   }
   img {
     width: 100%;
@@ -80,9 +80,19 @@ body, html {
 @media only screen and (max-width: 600px) {
   body, html {
     // take up most of the width of the page
-    width: 97%;
+    width: 99%;
+  }
+  h1, h2 {
+    overflow: auto;
   }
   #container {
-    padding: 10px;
+    //not working??
+    padding: 0;
+    margin: 10px 0;
+  }
+  #searchbox {
+    input {
+      width: 100%;
+    }
   }
 }
