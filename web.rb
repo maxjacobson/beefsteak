@@ -12,7 +12,7 @@ not_found do
 end
 
 error do
-  @title= get_title
+  @title = get_title
   @subtitle = "500"
   erb :'500'
 end
@@ -21,14 +21,57 @@ get '/css/style.css' do
   scss :style
 end
 
-get '/' do
+get '/~:page' do
+  # maybe include date/time in a "last updated on" context
+  @title = get_title
+  the_html = String.new
+  naked_filename = params[:page].to_s
+  filepath = "pages/" + naked_filename + ".md"
+  if File.exists?(filepath)
+    the_text = File.read(filepath)
+    page = separate_page_info(the_text)
+    @subtitle = page[:title]
+    the_html << Kramdown::Document.new(page[:text]).to_html
+    the_html << "\n<hr />\n<p><a href=\"/~#{naked_filename}.md\">Markdown source of this page</a></p>\n"
+  elsif File.exists?("pages/#{params[:page].to_s}")
+    source_filename = params[:page].to_s
+    without_md = source_filename.sub(/.md/, '')
+    the_text = File.read("pages/#{params[:page].to_s}")
+    the_text.gsub!(/</, '&lt;')
+    the_text.gsub!(/>/,'&gt;')
+    @subtitle = "markdown source of #{without_md} page"
+    the_html << "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"/~#{without_md}\">Back to #{without_md} page.</a></p>"
+  else
+    @error_page = "/~#{naked_filename}"
+    @subtitle = "404"
+    erb :'404'
+  end
+  erb the_html
+end
 
+get '/' do
   @title = get_title
   the_html = String.new
   to_sort = Array.new
   tag_cloud = Hash.new
   category_cloud = Hash.new
-  the_html << "  <ul>\n"
+
+  pages = Dir.entries("pages")
+  pages.sort!
+  if pages.length > 2
+    the_html << "<p>pages:</p>\n<ul>"
+    pages.each do |filename|
+      if filename =~ /.md/
+        naked_filename = filename.sub(/.md/,'')
+        the_text = File.read("pages/#{filename}")
+        page_info = separate_page_info(the_text)
+        the_html << "<li><a href=\"/~#{naked_filename}\">#{page_info[:title]}</a></li>"
+      end
+    end
+    the_html << "</ul>\n"
+  end
+
+  the_html << "<p>posts:</p>\n<ul>\n"
   posts = Dir.entries("posts")
   posts.each do |filename|
     if filename =~ /.md/

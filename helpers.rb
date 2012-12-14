@@ -82,6 +82,12 @@ def secs_to_str (n)
   end
 end
 
+def separate_page_info (text)
+  title = text.match(/^title: (.+)$/)[1]
+  text.sub!(/^title: .+$\n\n/, '')
+  return {:title => title, :text => text}
+end
+
 def separate_metadata_and_text (text)
   if text =~ /^title: .+$/
     title = text.match(/^title: .+$/)[0]
