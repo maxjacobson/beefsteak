@@ -56,7 +56,7 @@ get '/' do
   tag_cloud = Hash.new
   category_cloud = Hash.new
 
-  the_html << "<p>posts:</p>\n<ul>\n"
+  the_html << "<ul>\n"
   posts = Dir.entries("posts")
   posts.each do |filename|
     if filename =~ /.md/
