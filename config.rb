@@ -41,7 +41,7 @@ end
 
 def get_blog_description
   # used in the RSS feed
-  your_description = "The devblog of Max Jacobson"
+  your_description = "the devblog of Max Jacobson."
 end
 
 def get_blog_language

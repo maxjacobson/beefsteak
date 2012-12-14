@@ -22,7 +22,7 @@ get '/css/style.css' do
 end
 
 get '/' do
-  
+
   @title = get_title
   the_html = String.new
   to_sort = Array.new
@@ -36,7 +36,7 @@ get '/' do
       the_text = File.read("posts/" + filename)
       post_info = separate_metadata_and_text(the_text)
       post_info[:filename] = naked_filename
-      
+
       if include_cat_cloud?
         # populate category_cloud
         if category_cloud[post_info[:category]].nil?
@@ -45,7 +45,7 @@ get '/' do
           category_cloud[post_info[:category]] += 1
         end
       end
-      
+
       if include_tag_cloud?
         # populate tag_cloud
         post_info[:tags_array].each do |tag|
@@ -62,8 +62,8 @@ get '/' do
   end
 
   sorted = sort_posts(to_sort) # method in helper.rb
-  
-  
+
+
   if paginate? # if pagination is turned on
     if session[:current_page].nil? # if we dont know what page you're on
       session[:current_page] = 1 # then start at page one
@@ -87,12 +87,12 @@ get '/' do
       page_range[i] = true
     end
   end
-  
+
   if session[:current_page] > amount_of_pages
     redirect '/page/1'
   end
 
-  
+
   temp_pagination_counter = 1
   sorted.each do |post|
     if page_range[temp_pagination_counter] == true
@@ -101,7 +101,7 @@ get '/' do
     temp_pagination_counter += 1
   end
   the_html << "  </ul>\n"
-  
+
   if paginate? and amount_of_pages > 1
     @subtitle = "page #{current_page} (posts #{first_post_of_current_page}-#{last_post_of_current_page} of #{amount_of_posts})"
     the_html << "<p>Pages: "
@@ -119,7 +119,7 @@ get '/' do
   else
     @subtitle = get_subtitle
   end
-  
+
   if include_cat_cloud? or include_tag_cloud?
     the_html << "<hr />\n"
   end
@@ -167,8 +167,8 @@ get '/page/:num' do
   redirect '/'
 end
 
-get '/category/*' do
-  the_category = params[:splat][0].to_s
+get '/category/:category' do
+  the_category = params[:category].to_s
   if the_category == ""
     redirect '/'
   end
@@ -194,6 +194,7 @@ get '/category/*' do
     end
   end
   the_html << "  </ul>\n"
+  the_html << "  <p><a href=\"/category/#{the_category}/feed\">get the RSS feed for the #{the_category} category</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -203,8 +204,8 @@ get '/category/*' do
   end
 end
 
-get '/tag/*' do
-  the_tag = params[:splat][0].to_s
+get '/tag/:tag' do
+  the_tag = params[:tag].to_s
   if the_tag == ""
     redirect '/'
   end
@@ -232,6 +233,7 @@ get '/tag/*' do
     end
   end
   the_html << "  </ul>\n"
+  the_html << "  <p><a href=\"/tag/#{the_tag}/feed\">get the RSS feed for the #{the_tag} tag</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -295,8 +297,6 @@ end
 get '/search' do
   @title = get_title
   query = params[:q]
-
-  @title = get_title
   the_html = String.new
   to_sort = Array.new
   posts = Dir.entries("posts")
@@ -326,23 +326,11 @@ get '/search' do
   else
     @subtitle = "No search results for " + query
   end
+  the_html << "<p><a href=\"/search/#{query}/feed\">get the RSS feed for the search: #{query}</a></p>\n"
   erb the_html
 end
 
 get '/feed' do
-  the_feed = String.new
-  the_feed << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n"
-  the_feed << "<rss version=\"2.0\">\n"
-  the_feed << "<channel>\n"
-  the_feed << "  <title>#{get_title}</title>\n"
-  the_feed << "  <link>#{get_blog_address}</link>\n"
-  the_feed << "  <description>#{get_blog_description}</description>\n"
-  the_feed << "  <language>#{get_blog_language}</language>\n"
-  the_feed << "  <updated>#{Time.now}</updated>"
-  if get_email_address != nil
-    the_feed << "  <webMaster>#{get_email_address}</webMaster>\n"
-  end
-  
   to_sort = Array.new
   posts = Dir.entries("posts")
   posts.each do |filename|
@@ -354,22 +342,83 @@ get '/feed' do
       to_sort.push(post_info)
     end
   end
-
   sorted = sort_posts(to_sort) # method in helper.rb
-  sorted.each do |post|
-    the_feed << "  <item>\n"
-    the_feed << "    <title>#{post[:title]}</title>\n"
-    the_feed << "    <link>#{get_blog_address}#{post[:filename]}/</link>\n"
-    the_feed << "    <description><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></description>\n"
-    if get_email_address != nil
-      the_feed << "    <author><name>#{get_author_name}</name></author>\n"
-    end
-    the_feed << "  </item>\n"
-  end
-
-  the_feed << "</channel>\n"
-  the_feed << "</rss>\n"
-  
+  the_feed = make_feed_from_posts(sorted)
   content_type 'application/rss+xml'
   the_feed
 end
+
+get '/category/*/feed' do
+  the_category = params[:splat][0].to_s
+  if the_category == ""
+    redirect '/'
+  end
+  to_sort = Array.new
+  the_posts = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      post_info = separate_metadata_and_text(the_text)
+      post_info[:filename] = naked_filename
+      if post_info[:category] == the_category
+        to_sort.push(post_info)
+      end
+    end
+  end
+  the_posts = sort_posts(to_sort)
+  the_feed = make_feed_from_posts({:posts => the_posts, :type => :categoryfeed, :categoryname => the_category})
+  content_type 'application/rss+xml'
+  the_feed
+end
+
+get '/tag/*/feed' do
+  the_tag = params[:splat][0].to_s
+  if the_tag == ""
+    redirect '/'
+  end
+  to_sort = Array.new
+  the_posts = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      post_info = separate_metadata_and_text(the_text)
+      post_info[:filename] = naked_filename
+      if post_info[:tags_array].include?(the_tag)
+        to_sort.push(post_info)
+      end
+    end
+  end
+  the_posts = sort_posts(to_sort)
+  the_feed = make_feed_from_posts({:posts => the_posts, :type => :tagfeed, :tagname => the_tag})
+  content_type 'application/rss+xml'
+  the_feed
+end
+
+get '/search/*/feed' do
+  query = params[:splat][0].to_s
+  if query == ""
+    redirect '/'
+  end
+  to_sort = Array.new
+  posts = Dir.entries("posts")
+  posts.each do |filename|
+    if filename =~ /.md/
+      naked_filename = filename.sub(/.md/,'')
+      the_text = File.read("posts/" + filename)
+      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
+        post_info = separate_metadata_and_text(the_text)
+        post_info[:filename] = naked_filename
+        to_sort.push(post_info)
+      end
+    end
+  end
+  the_posts = sort_posts(to_sort)
+  the_feed = make_feed_from_posts({:posts => the_posts, :type => :searchfeed, :searchquery => query})
+  content_type 'application/rss+xml'
+  the_feed
+end
+# consider adding a feed for searches too...? or is that stupid?

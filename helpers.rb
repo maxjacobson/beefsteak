@@ -1,3 +1,46 @@
+def make_feed_from_posts (info)
+  # the_feed = make_feed_from_posts({:posts => the_posts, :type => :searchfeed, :searchquery => query})
+  posts = info[:posts]
+  if info[:type] == :tagfeed
+    title = "#{get_title} - #{info[:tagname]} tag feed"
+    description = get_blog_description + " Just the posts tagged #{info[:tagname]}."
+  elsif info[:type] == :categoryfeed
+    title = "#{get_title} - #{info[:categoryname]} category feed"
+    description = get_blog_description + " Just the posts categorized #{info[:categoryname]}."
+  elsif info[:type] == :searchfeed
+    title = "#{get_title} - #{info[:searchquery]} search feed"
+    description = get_blog_description + " Just the posts matching a search for #{info[:searchquery]}."
+  else
+    title = get_title
+    description = get_blog_description
+  end
+  the_feed = String.new
+  the_feed << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n"
+  the_feed << "<rss version=\"2.0\">\n"
+  the_feed << "<channel>\n"
+  the_feed << "  <title>#{title}</title>\n"
+  the_feed << "  <link>#{get_blog_address}</link>\n"
+  the_feed << "  <description>#{description}</description>\n"
+  the_feed << "  <language>#{get_blog_language}</language>\n"
+  the_feed << "  <updated>#{Time.now}</updated>"
+  if get_email_address != nil
+    the_feed << "  <webMaster>#{get_email_address}</webMaster>\n"
+  end
+  posts.each do |post|
+    the_feed << "  <item>\n"
+    the_feed << "    <title>#{post[:title]}</title>\n"
+    the_feed << "    <link>#{get_blog_address}#{post[:filename]}/</link>\n"
+    the_feed << "    <description><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></description>\n"
+    if get_email_address != nil
+      the_feed << "    <author><name>#{get_author_name}</name></author>\n"
+    end
+    the_feed << "  </item>\n"
+  end
+  the_feed << "</channel>\n"
+  the_feed << "</rss>\n"
+  return the_feed
+end
+
 def secs_to_str (n)
   if n < 0
     return "in the future...?"
@@ -127,11 +170,11 @@ def sort_posts (to_sort)
     end
     post[:sorter] = sorter.to_i
   end
-  
+
   # to_sort.each do |item|
   #   puts item[:sorter]
   # end
-  # 
+  #
   to_sort.sort! { |a,b| b[:sorter] <=> a[:sorter]}
   # puts
   # puts
