@@ -31,7 +31,7 @@ get '/~:page' do
     the_text = File.read(filepath)
     page = separate_page_info(the_text)
     @subtitle = page[:title]
-    the_html << Kramdown::Document.new(page[:text]).to_html
+    the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(page[:text]).to_html + "\n</div>\n"
     the_html << "\n<hr />\n<p><a href=\"/~#{naked_filename}.md\">Markdown source of this page</a></p>\n"
   elsif File.exists?("pages/#{params[:page].to_s}")
     source_filename = params[:page].to_s
