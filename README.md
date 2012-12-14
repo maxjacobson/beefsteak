@@ -4,6 +4,8 @@ A simple blog on a simple blogging engine. Mine is online currently at <http://d
 
 Just replace the contents of the `/posts` folder with your posts and the `config.rb` file with your info, and it should work.
 
+Same with the `/posts` folder.
+
 * make sure you have ruby, rubygems, and bundler
 * run `bundle install` to get the necessary gems
 * now you can run `ruby web.rb` and see the site in your browser on port 4567 at <http://localhost:4567>
@@ -18,4 +20,6 @@ Do whatever you want. It's as-is, etc.
 ## todos?
 
 * be consistent re: the trailing slash... for posts its there but not for tag pages. hrm.
-* if the date for something is in the future, don't show it
+* if the date for something is in the future, don't show it until then
+* maybe include public pinboard links ala a link blog?
+* maybe adapt for use as a podcast host / feed generator? Or add an option to include that? I can feel my butthole tightening as I consider those complications

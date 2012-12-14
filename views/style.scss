@@ -45,16 +45,32 @@ body, html {
     font-size: 80%;
   }
   #date {
-    background-color: grey;
+    background-color: gray;
     color: white;
     padding: 2px;
+  }
+}
+
+#pages_list {
+  li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 10px;
+  }
+  a {
+    padding: 2px;
+  }
+  a:hover {
+    border-radius: 2px;
   }
 }
 
 #searchbox {
   margin-top: 25px;
 }
+
 #pagelinks {
+  //is this targeting anything?
   list-style: none;
   li {
     display: inline;

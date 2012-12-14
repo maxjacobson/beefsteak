@@ -56,21 +56,6 @@ get '/' do
   tag_cloud = Hash.new
   category_cloud = Hash.new
 
-  pages = Dir.entries("pages")
-  pages.sort!
-  if pages.length > 2
-    the_html << "<p>pages:</p>\n<ul>"
-    pages.each do |filename|
-      if filename =~ /.md/
-        naked_filename = filename.sub(/.md/,'')
-        the_text = File.read("pages/#{filename}")
-        page_info = separate_page_info(the_text)
-        the_html << "<li><a href=\"/~#{naked_filename}\">#{page_info[:title]}</a></li>"
-      end
-    end
-    the_html << "</ul>\n"
-  end
-
   the_html << "<p>posts:</p>\n<ul>\n"
   posts = Dir.entries("posts")
   posts.each do |filename|

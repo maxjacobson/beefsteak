@@ -1,3 +1,21 @@
+def get_pages_for_header
+  the_html = String.new
+  pages = Dir.entries("pages")
+  pages.sort!
+  if pages.length > 2
+    the_html << "<ul id = \"pages_list\">"
+    pages.each do |filename|
+      if filename =~ /.md/
+        naked_filename = filename.sub(/.md/,'')
+        the_text = File.read("pages/#{filename}")
+        page_info = separate_page_info(the_text)
+        the_html << "<li><a href=\"/~#{naked_filename}\">#{page_info[:title]}</a></li>"
+      end
+    end
+    the_html << "</ul>\n"
+  end
+  return the_html
+end
 def make_feed_from_posts (info)
   # the_feed = make_feed_from_posts({:posts => the_posts, :type => :searchfeed, :searchquery => query})
   posts = info[:posts]

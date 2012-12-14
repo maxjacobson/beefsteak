@@ -2,7 +2,7 @@ title: Favblogging with pinboard, ifttt, and the rest of the internet
 date: 2012-08-26
 time: 6:18 PM
 category: the internet
-tags: pinboard, favs, favorites, love, gush, ifttt
+tags: pinboard, favs, favorites, love, gush, ifttt, from the archives
 
 ## MY FAV STUFF
 
@@ -41,13 +41,13 @@ Because I find this stuff interesting, I was initially excited about [the Mac ap
  [5]: http://www.favsapp.com/
 
 > ## Find Favorites
-> 
+>
 > Instead of spreading your favorites across different networks, use Favs to sync them to your Mac. Don't waste any more time on searching for your favorite content - Favs has a powerful search feature build right into the application that makes finding what you like a breeze.
 
 Which is great but that's what I use Pinboard for already and I'm very satisfied with that.
 
 > ## Follow Favorites
-> 
+>
 > Many favorites are public, for example on Twitter. This allows you to follow the favorites of persons you like and just see their hand-picked articles. For those sources Favs marks new entries as ‘unread’ and you can use Favs as a sophisticated Reader app.
 
 Which is closer to what I want: basically a Mac Stellar app. I may have to give this one another chance. My consumption of others' favs is minimal to non-existent, so I should similarize my expectations for others' interest in my favs.
@@ -83,7 +83,7 @@ I'll give the final word to Rob Delaney:
 <blockquote class="twitter-tweet">
   <p>
     People ask me why I fave or star so many tweets. I’M A PASSIONATE MAN & THIS PASSIONATE MAN NEEDN’T EXPLAIN HIMSELF TO YOU LOT.
-  </p>— rob delaney (@robdelaney) 
-  
+  </p>— rob delaney (@robdelaney)
+
   <a href="https://twitter.com/robdelaney/status/238203754736926721" data-datetime="2012-08-22T09:19:35+00:00">August 22, 2012</a>
 </blockquote>
