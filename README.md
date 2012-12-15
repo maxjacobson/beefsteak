@@ -19,10 +19,7 @@ Do whatever you want. It's as-is, etc.
 
 ## todos and notes to self
 
-* be consistent re: the trailing slash... for posts its there but not for tag pages. hrm.
-    * it should be pretty simple to fix the trailing slash thing. just include the markdown preview within the same get, like you do with pages
-    * set up a redirect or something for / to no slash
-    * related thought: should the pages include a tilde? could just combine the ~ get into the `get /*` and first check if the file exists in `/posts` and if so, make a post, then check if it exists in `/pages` and if so make a page... hrm
+* should the pages include a tilde? could just combine the ~ get into the `get /*` and first check if the file exists in `/posts` and if so, make a post, then check if it exists in `/pages` and if so make a page... hrm
 * if the date for something is in the future, don't show it until then
 * maybe include public pinboard links ala a link blog?
 * maybe adapt for use as a podcast host / feed generator? Or add an option to include that? I can feel my butthole tightening as I consider those complications
