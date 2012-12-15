@@ -23,22 +23,26 @@ def make_feed_from_posts (info)
   if info[:type] == :tagfeed
     title = "#{unhyphenate(info[:tagname])} tag | #{get_title}"
     description = get_blog_description + " Just the posts tagged #{info[:tagname]}."
+    feed_link = "#{get_blog_address}tag/#{info[:tagname]}"
   elsif info[:type] == :categoryfeed
     title = "#{unhyphenate(info[:categoryname])} category | #{get_title}"
     description = get_blog_description + " Just the posts categorized #{info[:categoryname]}."
+    feed_link = "#{get_blog_address}category/#{info[:categoryname]}"
   elsif info[:type] == :searchfeed
     title = "#{info[:searchquery]} search | #{get_title}"
     description = get_blog_description + " Just the posts matching a search for #{info[:searchquery]}."
+    feed_link = "#{get_blog_address}search?q=#{info[:searchquery]}"
   else
     title = get_title
     description = get_blog_description
+    feed_link = get_blog_address
   end
   the_feed = String.new
   the_feed << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n"
   the_feed << "<rss version=\"2.0\">\n"
   the_feed << "<channel>\n"
   the_feed << "  <title>#{title}</title>\n"
-  the_feed << "  <link>#{get_blog_address}</link>\n"
+  the_feed << "  <link>#{feed_link}</link>\n"
   the_feed << "  <description>#{description}</description>\n"
   the_feed << "  <language>#{get_blog_language}</language>\n"
   the_feed << "  <updated>#{Time.now}</updated>"
