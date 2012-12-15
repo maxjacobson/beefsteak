@@ -1,6 +1,6 @@
 title: fuzzy search
-date: 2012-12-15
-time: 12:01 AM
+date: 2012-12-14
+time: 11:59 PM
 category: coding
 tags: search, fuzzy, arrays, ruby, regular expressions
 
