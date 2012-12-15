@@ -32,7 +32,7 @@ get '/~:page' do
     page = separate_page_info(the_text)
     @subtitle = page[:title]
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(page[:text]).to_html + "\n</div>\n"
-    the_html << "\n<hr />\n<p><a href=\"/~#{naked_filename}.md\">Markdown source of this page</a></p>\n"
+    the_html << "\n<hr />\n<p><a href=\"/~#{naked_filename}.md\"><img src=\"/img/md.png\" /> Markdown source of this page</a></p>\n"
   elsif File.exists?("pages/#{params[:page].to_s}")
     source_filename = params[:page].to_s
     without_md = source_filename.sub(/.md/, '')
@@ -40,7 +40,7 @@ get '/~:page' do
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
     @subtitle = "markdown source of #{without_md} page"
-    the_html << "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"/~#{without_md}\">Back to #{without_md} page.</a></p>"
+    the_html << "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"/~#{without_md}\">Back to <span class=\"underline\">#{without_md}</span> page.</a></p>"
   else
     @error_page = "/~#{naked_filename}"
     @subtitle = "404"
@@ -285,8 +285,8 @@ get '/*.md' do
     the_text = File.read(filepath)
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
-    @subtitle = "markdown source of " + post_info[:title]
-    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}\">Back to #{post_info[:title]}</a> post.</p>"
+    @subtitle = "markdown source of #{post_info[:title]}"
+    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}\">Back to <span class=\"underline\">#{post_info[:title]}</span></a> post.</p>"
   else
     @error_page = naked_filename + ".md"
     @subtitle = "404"
@@ -460,7 +460,7 @@ get '/*' do
     the_text = File.read(filepath)
     post_info = separate_metadata_and_text(the_text)
     the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} ago at #{post_info[:time]} on #{post_info[:month_word]} #{post_info[:day]}, #{post_info[:year]}</p>\n"
-    the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
+    the_html << "<div class=\"instapaper_body post_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
     the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
     if post_info[:tags_array].length > 0
       the_html << "<p>Tags: "
@@ -474,7 +474,7 @@ get '/*' do
       end
       the_html << "</p>\n"
     end
-    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source of this post</a>\n"
+    the_html << "<p><a href=\"/#{naked_filename}.md\"><img src=\"/img/md.png\" width=\"28px\"/> Markdown source of this page</a></p>\n"
     @subtitle = post_info[:title]
     erb the_html
   else
