@@ -337,7 +337,7 @@ get '/search' do
   else
     @subtitle = "No search results for " + query
   end
-  the_html << "<p><a href=\"/search/#{query.gsub!(/ /, '-')}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
+  the_html << "<p><a href=\"/search/#{query.gsub(/ /, '-')}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
   erb the_html
 end
 
