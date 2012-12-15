@@ -422,6 +422,12 @@ get '/search/*/feed' do
   the_feed
 end
 
+get '/*/' do
+  # this is a legacy thing bc I originally used trailing slashes for post URLs and don't want those links to be broken
+  oops = params[:splat][0]
+  redirect '/' + oops
+end
+
 get '/*' do
   @title = get_title
   naked_filename = params[:splat][0].to_s
@@ -453,10 +459,4 @@ get '/*' do
     @subtitle = "404"
     erb :'404'
   end
-end
-
-get '/*/' do
-  # this is a legacy thing bc I originally used trailing slashes for post URLs and don't want those links to be broken
-  oops = params[:splat][0]
-  redirect '/' + oops
 end
