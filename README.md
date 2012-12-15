@@ -27,3 +27,4 @@ Do whatever you want. It's as-is, etc.
 * allow single quotes in search not just double quotes
 * sort search results by relevance, maybe include a little snippet that matches???
 * should search also check pages? probably not, right? just checking posts is probably fine
+* feeds for search queries... seem to ignore quoted queries. is that cool? consider fixing that
