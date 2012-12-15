@@ -17,16 +17,17 @@ def get_pages_for_header
   return the_html
 end
 def make_feed_from_posts (info)
-  # the_feed = make_feed_from_posts({:posts => the_posts, :type => :searchfeed, :searchquery => query})
+  # example info:
+  # info = {:posts => the_posts, :type => :searchfeed, :searchquery => query}
   posts = info[:posts]
   if info[:type] == :tagfeed
-    title = "#{get_title} - #{info[:tagname]} tag feed"
+    title = "#{unhyphenate(info[:tagname])} tag | #{get_title}"
     description = get_blog_description + " Just the posts tagged #{info[:tagname]}."
   elsif info[:type] == :categoryfeed
-    title = "#{get_title} - #{info[:categoryname]} category feed"
+    title = "#{unhyphenate(info[:categoryname])} category | #{get_title}"
     description = get_blog_description + " Just the posts categorized #{info[:categoryname]}."
   elsif info[:type] == :searchfeed
-    title = "#{get_title} - #{info[:searchquery]} search feed"
+    title = "#{info[:searchquery]} search | #{get_title}"
     description = get_blog_description + " Just the posts matching a search for #{info[:searchquery]}."
   else
     title = get_title
@@ -47,7 +48,7 @@ def make_feed_from_posts (info)
   posts.each do |post|
     the_feed << "  <item>\n"
     the_feed << "    <title>#{post[:title]}</title>\n"
-    the_feed << "    <link>#{get_blog_address}#{post[:filename]}/</link>\n"
+    the_feed << "    <link>#{get_blog_address}#{post[:filename]}</link>\n"
     the_feed << "    <description><![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]></description>\n"
     if get_email_address != nil
       the_feed << "    <author><name>#{get_author_name}</name></author>\n"

@@ -127,7 +127,7 @@ get '/' do
   temp_pagination_counter = 1
   sorted.each do |post|
     if page_range[temp_pagination_counter] == true
-      the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
+      the_html << "    <li><a href=\"/#{post[:filename]}\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
     end
     temp_pagination_counter += 1
   end
@@ -221,7 +221,7 @@ get '/category/:category' do
   sorted = sort_posts(to_sort) # method in helper.rb
   sorted.each do |post|
     if the_category == post[:category]
-      the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
+      the_html << "    <li><a href=\"/#{post[:filename]}\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
     end
   end
   the_html << "  </ul>\n"
@@ -259,7 +259,7 @@ get '/tag/:tag' do
   sorted.each do |post|
     for t in 0...post[:tags_array].length
       if post[:tags_array][t] == the_tag
-        the_html << "    <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
+        the_html << "    <li><a href=\"/#{post[:filename]}\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
       end
     end
   end
@@ -274,38 +274,7 @@ get '/tag/:tag' do
   end
 end
 
-get '/*/' do
-  @title = get_title
-  naked_filename = params[:splat][0].to_s
-  filepath = "posts/" + naked_filename + ".md"
-  if File.exists?(filepath)
-    the_html = String.new
-    the_text = File.read(filepath)
-    post_info = separate_metadata_and_text(the_text)
-    the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} ago at #{post_info[:time]} on #{post_info[:month_word]} #{post_info[:day]}, #{post_info[:year]}</p>\n"
-    the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
-    the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
-    if post_info[:tags_array].length > 0
-      the_html << "<p>Tags: "
-      i = 1
-      post_info[:tags_array].each do |tag|
-        the_html << "<a href=\"/tag/#{tag}\">#{unhyphenate(tag)}</a>"
-        if i != post_info[:tags_array].length
-          the_html << ", "
-        end
-        i +=1
-      end
-      the_html << "</p>\n"
-    end
-    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source of this post</a>\n"
-    @subtitle = post_info[:title]
-    erb the_html
-  else
-    @error_page = naked_filename
-    @subtitle = "404"
-    erb :'404'
-  end
-end
+
 
 get '/*.md' do
   @title = get_title
@@ -317,7 +286,7 @@ get '/*.md' do
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
     @subtitle = "markdown source of " + post_info[:title]
-    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}/\">Back to #{post_info[:title]}</a> post.</p>"
+    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}\">Back to #{post_info[:title]}</a> post.</p>"
   else
     @error_page = naked_filename + ".md"
     @subtitle = "404"
@@ -351,7 +320,7 @@ get '/search' do
     end
     the_html << "<ul>\n"
     sorted.each do |post|
-      the_html << "  <li><a href=\"/#{post[:filename]}/\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
+      the_html << "  <li><a href=\"/#{post[:filename]}\">#{post[:title]}</a> <small>Posted #{post[:relative_date]} ago.</small></li>\n"
     end
     the_html << "\n</ul>"
   else
@@ -451,4 +420,43 @@ get '/search/*/feed' do
   the_feed = make_feed_from_posts({:posts => the_posts, :type => :searchfeed, :searchquery => query})
   content_type 'application/rss+xml'
   the_feed
+end
+
+get '/*' do
+  @title = get_title
+  naked_filename = params[:splat][0].to_s
+  filepath = "posts/" + naked_filename + ".md"
+  if File.exists?(filepath)
+    the_html = String.new
+    the_text = File.read(filepath)
+    post_info = separate_metadata_and_text(the_text)
+    the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} ago at #{post_info[:time]} on #{post_info[:month_word]} #{post_info[:day]}, #{post_info[:year]}</p>\n"
+    the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
+    the_html << "<hr />\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
+    if post_info[:tags_array].length > 0
+      the_html << "<p>Tags: "
+      i = 1
+      post_info[:tags_array].each do |tag|
+        the_html << "<a href=\"/tag/#{tag}\">#{unhyphenate(tag)}</a>"
+        if i != post_info[:tags_array].length
+          the_html << ", "
+        end
+        i +=1
+      end
+      the_html << "</p>\n"
+    end
+    the_html << "<a href=\"/#{naked_filename}.md\">Markdown source of this post</a>\n"
+    @subtitle = post_info[:title]
+    erb the_html
+  else
+    @error_page = naked_filename
+    @subtitle = "404"
+    erb :'404'
+  end
+end
+
+get '/*/' do
+  # this is a legacy thing bc I originally used trailing slashes for post URLs and don't want those links to be broken
+  oops = params[:splat][0]
+  redirect '/' + oops
 end
