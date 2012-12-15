@@ -297,6 +297,14 @@ end
 get '/search' do
   @title = get_title
   query = params[:q]
+  if query =~ /^".+"$/
+    # query is in quotes
+    # so go for an exact match
+    query_array = [query.gsub!(/"/,'')] # remove the quotes
+  else
+    # query is not in quotes, so match each word
+    query_array = query.split(' ') # make an array of each word
+  end
   the_html = String.new
   to_sort = Array.new
   posts = Dir.entries("posts")
@@ -304,10 +312,13 @@ get '/search' do
     if filename =~ /.md/
       naked_filename = filename.sub(/.md/,'')
       the_text = File.read("posts/" + filename)
-      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
-        post_info = separate_metadata_and_text(the_text)
-        post_info[:filename] = naked_filename
-        to_sort.push(post_info)
+      query_array.each do |q|
+        if the_text =~ Regexp.new(q, true) # weirdly, the truth means this is case insensitive
+          post_info = separate_metadata_and_text(the_text)
+          post_info[:filename] = naked_filename
+          to_sort.push(post_info)
+          break # because i dont want to push the same post over and over
+        end
       end
     end
   end
@@ -326,7 +337,7 @@ get '/search' do
   else
     @subtitle = "No search results for " + query
   end
-  the_html << "<p><a href=\"/search/#{query}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
+  the_html << "<p><a href=\"/search/#{query.gsub!(/ /, '-')}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
   erb the_html
 end
 
@@ -400,8 +411,17 @@ end
 
 get '/search/*/feed' do
   query = params[:splat][0].to_s
+  query.gsub!(/-/, ' ')
   if query == ""
     redirect '/'
+  end
+  if query =~ /^".+"$/
+    # query is in quotes
+    # so go for an exact match
+    query_array = [query.gsub!(/"/,'')]
+  else
+    # query is not in quotes, so match each word
+    query_array = query.split(' ')
   end
   to_sort = Array.new
   posts = Dir.entries("posts")
@@ -409,10 +429,13 @@ get '/search/*/feed' do
     if filename =~ /.md/
       naked_filename = filename.sub(/.md/,'')
       the_text = File.read("posts/" + filename)
-      if the_text =~ Regexp.new(query, true) # I _think_ the true here means that it will be case insensitive
-        post_info = separate_metadata_and_text(the_text)
-        post_info[:filename] = naked_filename
-        to_sort.push(post_info)
+      query_array.each do |q|
+        if the_text =~ Regexp.new(q, true)
+          post_info = separate_metadata_and_text(the_text)
+          post_info[:filename] = naked_filename
+          to_sort.push(post_info)
+          break
+        end
       end
     end
   end

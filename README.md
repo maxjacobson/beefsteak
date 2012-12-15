@@ -24,3 +24,6 @@ Do whatever you want. It's as-is, etc.
 * maybe include public pinboard links ala a link blog?
 * maybe adapt for use as a podcast host / feed generator? Or add an option to include that? I can feel my butthole tightening as I consider those complications
 * consider amending the HTML head to refer to the secondary feeds when on category/tag/search pages
+* allow single quotes in search not just double quotes
+* sort search results by relevance, maybe include a little snippet that matches???
+* should search also check pages? probably not, right? just checking posts is probably fine
