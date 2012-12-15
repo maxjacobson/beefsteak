@@ -6,7 +6,7 @@
   <link href="/css/style.css" rel="stylesheet" />
   <link rel="alternate" type="application/atom+xml" href="/feed" />
   <% if @secondary_feed.nil? == false %>
-    <link rel="alternate" type="application/atom+xml" href="<%= @secondary_feed %>" />
+  <link rel="alternate" type="application/atom+xml" href="<%= @secondary_feed %>" />
   <% end %>
   <link href="/img/favicon.ico" type="image/x-icon" rel="icon">
   <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon.png">
@@ -31,6 +31,9 @@
   <input id="searcher" type="text" name="q" placeholder="Search...">
 </form>
 <p><a href="/feed">RSS Feed</a></p>
+<% if include_copyright? %>
+<p><%= copyright_message %></p>
+<% end %>
 <p>Powered by <a href="http://github.com/maxjacobson/beefsteak/">beefsteak</a></p>
 </div>
 </body>

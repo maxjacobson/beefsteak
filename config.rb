@@ -5,6 +5,16 @@ def paginate?
   false
 end
 
+def include_copyright?
+  # can set to true to include a copyright message
+  false
+end
+
+def copyright_message
+  # can customize this
+  "&copy; #{get_author_name} #{Time.now.year}. All rights reserved."
+end
+
 def get_posts_per_page
   # if pagination is on, this is how many items will be on each page
   posts_per_page = 20
