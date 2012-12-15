@@ -5,6 +5,9 @@
   <title><%= @subtitle.downcase %> | <%= @title.downcase %></title>
   <link href="/css/style.css" rel="stylesheet" />
   <link rel="alternate" type="application/atom+xml" href="/feed" />
+  <% if @secondary_feed.nil? == false %>
+    <link rel="alternate" type="application/atom+xml" href="<%= @secondary_feed %>" />
+  <% end %>
   <link href="/img/favicon.ico" type="image/x-icon" rel="icon">
   <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon.png">
   <meta name="author" content="<%= get_author_name %>">

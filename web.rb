@@ -225,7 +225,8 @@ get '/category/:category' do
     end
   end
   the_html << "  </ul>\n"
-  the_html << "  <p><a href=\"/category/#{the_category}/feed\">get the RSS feed for the #{unhyphenate(the_category)} category</a></p>\n"
+  @secondary_feed = "/category/#{the_category}/feed"
+  the_html << "  <p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_category)} category</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -264,7 +265,8 @@ get '/tag/:tag' do
     end
   end
   the_html << "  </ul>\n"
-  the_html << "  <p><a href=\"/tag/#{the_tag}/feed\">get the RSS feed for the #{unhyphenate(the_tag)} tag</a></p>\n"
+  @secondary_feed = "/tag/#{the_tag}/feed"
+  the_html << "  <p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_tag)} tag</a></p>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -337,7 +339,8 @@ get '/search' do
   else
     @subtitle = "No search results for " + query
   end
-  the_html << "<p><a href=\"/search/#{query.gsub(/ /, '-')}/feed\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
+  @secondary_feed = "/search/#{query.gsub(/ /, '-')}/feed"
+  the_html << "<p><a href=\"#{@secondary_feed}\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
   erb the_html
 end
 
