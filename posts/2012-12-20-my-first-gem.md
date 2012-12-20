@@ -1,5 +1,5 @@
 title: my first gem
-date: 2012-12-19
+date: 2012-12-20
 time: 7:45 AM
 category: coding
 tags: ruby, rubygems, gems, smashcut
