@@ -1,6 +1,8 @@
 # beefsteak
 
-A simple blog on a simple blogging engine. Mine is online currently at <http://devblog.maxjacobson.net> and I guess it'll probably stay there.
+**update: 2012-12-22**: *added some support for pinboard which breaks some stuff mostly pagination? Maybe? I don't feel like testing it right now*
+
+A simple blog on a simple blogging engine. Mine is online currently at <http://www.maxjacobson.net>.
 
 Just replace the contents of the `/posts` folder with your posts and the `config.rb` file with your info, and it should work.
 

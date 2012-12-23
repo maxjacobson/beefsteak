@@ -1,5 +1,19 @@
 # hypothetically, if you're using this and you're not max jacobson, this is the only file you need to change to use this little blogging engine
 
+def pinboard_username
+  return "maxjacobson"
+end
+
+def num_links
+  return "55"
+end
+
+def hot_tag
+  # which pinboard tag should stand out?
+  # TODO make this support more than one tag?
+  return "max_jacobson"
+end
+
 def paginate?
   # change to false to make the homepage display all posts
   false

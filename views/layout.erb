@@ -28,13 +28,15 @@
 <%= yield %>
 <hr />
 <form action="/search" id="searchbox">
-  <input id="searcher" type="text" name="q" placeholder="Search...">
+  <input id="searcher" type="text" name="q" placeholder="Search posts...">
 </form>
-<p><a href="/feed">RSS Feed</a></p>
+<p><a href="/feed">Posts RSS Feed</a></p>
 <% if include_copyright? %>
 <p><%= copyright_message %></p>
 <% end %>
 <p>Powered by <a href="http://github.com/maxjacobson/beefsteak/">beefsteak</a></p>
 </div>
+<script src="/js/jquery.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>

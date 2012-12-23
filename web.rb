@@ -21,6 +21,19 @@ get '/css/style.css' do
   scss :style
 end
 
+get '/js/app.js' do
+  the_js = "require(['jquery'], function ($) {\n  $(document).ready(function () {\n    $(function() {\n      return $(this).find('.pin-tag').html() === '#{hot_tag}';\n      }).addClass('extra-hot');\n    });\n  });\n});"
+  content_type 'application/javascript'
+  return the_js
+end
+
+get '/' do
+  @title = get_title
+  @subtitle = "55 hot links"
+  the_html = String.new
+  erb "<script language=\"javascript\" src=\"http://pinboard.in//widgets/v1/linkroll/?user=#{pinboard_username}&count=#{num_links}\"></script>"
+end
+
 get '/~:page' do
   # maybe include date/time in a "last updated on" context
   @title = get_title
@@ -49,7 +62,7 @@ get '/~:page' do
   erb the_html
 end
 
-get '/' do
+get '/posts' do
   @title = get_title
   the_html = String.new
   to_sort = Array.new
@@ -148,7 +161,7 @@ get '/' do
     end
     the_html << "</p>\n"
   else
-    @subtitle = get_subtitle
+    @subtitle = "posts"
   end
 
   if include_cat_cloud? or include_tag_cloud?

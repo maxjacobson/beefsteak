@@ -1,9 +1,12 @@
+require 'pinboard'
+
 def get_pages_for_header
   the_html = String.new
   pages = Dir.entries("pages")
   pages.sort!
   if pages.length > 2
     the_html << "<div class=\"pages_list\"><ul>\n"
+    the_html << "  <li><a href=\"/posts\">posts</a></li>\n"
     pages.each do |filename|
       if filename =~ /.md/
         naked_filename = filename.sub(/.md/,'')
