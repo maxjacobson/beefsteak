@@ -1,5 +1,3 @@
-require 'pinboard'
-
 def get_pages_for_header
   the_html = String.new
   pages = Dir.entries("pages")
