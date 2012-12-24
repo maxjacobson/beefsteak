@@ -1,5 +1,13 @@
 # hypothetically, if you're using this and you're not max jacobson, this is the only file you need to change to use this little blogging engine
 
+def include_analytics?
+  true
+end
+
+def analytics_id
+  "UA-4982721-9"
+end
+
 def pinboard_username
   return "maxjacobson"
 end
