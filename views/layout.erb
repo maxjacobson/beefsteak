@@ -31,11 +31,7 @@
 </head>
 <body>
 <div id="container">
-<% if paginate? and session[:current_page] != 1 %>
-<h1 id="title"><a href ="/page/1"><%= @title.downcase %></a></h1>
-<% else %>
-<h1 id="title"><a href ="/"><%= @title.downcase %></a></h1>
-<% end %>
+<h1 id="title"><%= @title.downcase %></h1>
 <h1 id="author">by <%= get_author_name.downcase %></h1>
 <%= get_pages_for_header %>
 <hr />
