@@ -102,9 +102,9 @@ body, html {
     h1, h2 { overflow: auto;}
     #container {
       //not working??
-      padding: 0 10px;
+      padding: 10px;
     }
   }
 
-  #searchbox { input { width: 100%; } }
+  #searchbox { input { width: 90%; } }
 }
