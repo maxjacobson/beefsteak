@@ -2,7 +2,7 @@ title: Learning new things
 date: 2012-08-26
 time: 5:13 PM
 category: coding
-tags: css, git, github, pinboard, sass, scss, css, wordpress, from the archives
+tags: css, git, github, pinboard, sass, scss, wordpress, from the archives
 
 What have I learned lately?
 
