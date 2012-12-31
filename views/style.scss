@@ -33,7 +33,6 @@ body, html {
     padding: 0;
     border: none;
     border-top: medium double #333;
-    color: #333;
   }
   .post_body {
     img {
@@ -92,6 +91,14 @@ body, html {
   }
   .vimeo {
   //  width: 100%;
+  }
+  .footnotes {
+    border-top: 1px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-color: black;
+    border-style: dotted;
   }
 }
 
