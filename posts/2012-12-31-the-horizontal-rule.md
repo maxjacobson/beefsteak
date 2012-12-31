@@ -20,9 +20,9 @@ Let's talk about lines.
 
 There aren't that many HTML tags, and markdown only supports the small subset that are relevant to writers. So let's make use of them.
 
-There are a few ways to make an `<hr />` in markdown. I tend to write `* * *` but it's flexible. You could use hyphens instead if you like and space them out if you like.
+There are a few ways to make an `<hr>` in markdown. I tend to write `* * *` but it's flexible. You could use hyphens instead if you like and space them out if you like.
 
-In HTML, the horizontal rule looks like this: `<hr />`. On this blog, in a browser, at this time of writing, it looks like two thin lines on top of one another. The css I used for that looks like this:
+In HTML, the horizontal rule looks like this: `<hr>`. On this blog, in a browser, at this time of writing, it looks like two thin lines on top of one another. The css I used for that looks like this:
 
     hr {
       padding: 0;
@@ -30,18 +30,18 @@ In HTML, the horizontal rule looks like this: `<hr />`. On this blog, in a brows
       border-top: medium double #333;
     }
 
-**Edit:** Actually, I've already changed it. The rules outside of the post body are still that, but the rules within post bodies are now stars as described below.
+**Edit:** Actually, I've already changed it. The horizontal rules outside of the post body are still that, but the ones within post bodies are now stars as described below.
 
-CSS is really flexible. You can even style an `<hr />` as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
+CSS is really flexible. You can even style an `<hr>` as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr>`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
 
 [this one]: http://www.sovavsiti.cz/css/hr.html
 
-Considering how good `<hr />`s are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
+Considering how good `<hr>`s are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
 
 [Shawn Blanc]: http://shawnblanc.net/2012/12/inbox-intentions/
 [Stephen Hackett]: http://512pixels.net/2012/12/learning-curve/
 
-They get the appeal of a nice separating line but instead of using an `<hr />`, which is easy to make with markdown, which I think they both use, they do this:
+They get the appeal of a nice separating line but instead of using an `<hr>`, which is easy to make with markdown, which I think they both use, they do this:
 
     <div align="center">* * *</div>
 
@@ -49,7 +49,7 @@ or:
 
     <p style="text-align:center">* * *</p>
 
-Both commit the cardinal sin of embedding CSS in the middle of an HTML tag. You're not supposed to do that! Even if you don't want to use an `<hr />`, the correct move would be to [separate content and presentation][] by assigning a class and then selecting that class with the CSS, like so:
+Both commit the cardinal sin of embedding CSS in the middle of an HTML tag. You're not supposed to do that! Even if you don't want to use an `<hr>`, the correct move would be to [separate content and presentation][] by assigning a class and then selecting that class with the CSS, like so:
 
 The HTML:
 
@@ -71,7 +71,7 @@ If I'm reading a post outside of a browser, it's probably in Reeder or Instapape
 
 [it's just a couple of asterisks]: http://d.pr/i/yP1Y
 
-Had they used an `<hr />`, each individual reader would style it as they see fit, but they would understand what it is and work to convey your meaning.
+Had they used an `<hr>`, each individual reader would style it as they see fit, but they would understand what it is and work to convey your meaning.
 
 Besides, it's not that [semantic][] is it?
 
@@ -81,9 +81,9 @@ Blanc's p tag is most egregious in this regard, because p means *paragraph*, whi
 
 * * *
 
-Here's the rub: as flexible as CSS is, I have no idea how to style an `<hr />` so that it looks the way these guys seem to want it to look without embedding a small image at every `<hr />`, which introduces its own set of problems.
+Here's the rub: as flexible as CSS is, I have no idea how to style an `<hr>` so that it looks the way these guys seem to want it to look without embedding a small image at every `<hr>`, which introduces its own set of problems.
 
-* According to [Prokop][], an image `<hr />` has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the `<hr />` in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
+* According to [Prokop][], an image `<hr>` has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the `<hr>` in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
 * I've tried this in the past and it looked kind of lo-res and not great on a retina display
 
 [Prokop]: http://www.sovavsiti.cz/css/hr.html
@@ -97,7 +97,7 @@ So what would that look like?
 
 The HTML:
 
-    <hr />
+    <hr>
 
 The CSS:
 
@@ -111,9 +111,7 @@ The image could be anything but [here's one][] I just whipped up in pixelmator w
 
 [here's one]: http://d.pr/i/AoSz
 
-This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>`[^2]. His rule looks like three pale centered dots and doesn't use an image.
-
-[^2]: without the closing slash which I think is a relatively recent convention. Actually, my blog doesn't use the trailing slash either. Hmm. I use the [Kramdown gem](https://rubygems.org/gems/kramdown) for markdown processing, which maybe follows the original markdown implementation. Maybe that trailing slash is for chumps. I'm leaving them throughout this post tho.
+This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway. His horizontal rule looks like three pale centered dots and doesn't use an image.
 
 His CSS:
 
