@@ -68,7 +68,7 @@ end
 def get_blog_address
   # used in the RSS feed
   # include the final slash plssss
-  your_address = "http://devblog.maxjacobson.net/"
+  your_address = "http://www.maxjacobson.net/"
 end
 
 def get_blog_description
