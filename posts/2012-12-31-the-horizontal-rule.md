@@ -109,4 +109,19 @@ The image could be anything but [here's one][] I just whipped up in pixelmator w
 
 [here's one]: http://d.pr/i/AoSz
 
-This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for John Gruber anyway.
+This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>` without the closing slash that I think is a relatively recent convention. His rule looks like three pale centered dots and doesn't use an image.
+
+His CSS:
+
+    hr {
+      height: 1px;
+      margin: 2em 1em 4em 0;
+      text-align: center;
+      border-color: #777;
+      border-width: 0;
+      border-style: dotted;
+      }
+
+[John Gruber]: http://daringfireball.net/2012/12/google_maps_iphone
+
+I don't really understand how that becomes three pale dots but then I don't really know anything about CSS.
