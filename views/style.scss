@@ -100,6 +100,18 @@ body, html {
     border-color: black;
     border-style: dotted;
   }
+  .post_body {
+    hr {
+      height: 13px;
+      background: url(/img/hr.png) no-repeat scroll center;
+      border: 0;
+    }
+  }
+  .post_meta {
+    background-color: #E0E0E0;
+    padding: 0 3px;
+    border-radius: 2px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
