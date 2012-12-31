@@ -30,7 +30,7 @@ In HTML, the horizontal rule looks like this: `<hr />`. On this blog, in a brows
       border-top: medium double #333;
     }
 
-CSS is really flexible. You can even replace an `<hr />` with an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`'s. Heres [another](http://css-tricks.com/examples/hrs/).
+CSS is really flexible. You can even replace an `<hr />` with an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
 
 [this one]: http://www.tizag.com/htmlT/htmlhr.php
 
