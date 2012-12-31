@@ -61,7 +61,7 @@ The CSS:
 
 [separate content and presentation]: http://en.wikipedia.org/wiki/Separation_of_presentation_and_content
 
-I *assume* they do it this way with the hope that it will be more portable. These days, people often read blog posts in their RSS reader, far out of reach of their blog's CSS. In these contexts, the post is subject to the reader app's CSS, and a div with a class will be treated as unstyled text, but a div with inline CSS might still be styled.
+I *assume* they do it this way with the hope that it will be more portable. These days, people often read blog posts in their RSS reader or read later app, far out of reach of their blog's CSS. In these contexts, the post is subject to the reader app's CSS, and a div with a class will be treated as unstyled text, but a div with inline CSS might still be styled.
 
 Sometimes.
 
