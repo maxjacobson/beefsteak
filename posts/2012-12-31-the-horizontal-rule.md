@@ -111,7 +111,9 @@ The image could be anything but [here's one][] I just whipped up in pixelmator w
 
 [here's one]: http://d.pr/i/AoSz
 
-This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>` without the closing slash which I think is a relatively recent convention. His rule looks like three pale centered dots and doesn't use an image.
+This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>`[^2]. His rule looks like three pale centered dots and doesn't use an image.
+
+[^2]: without the closing slash which I think is a relatively recent convention. Actually, my blog doesn't use the trailing slash either. Hmm. I use the [Kramdown gem](https://rubygems.org/gems/kramdown) for markdown processing, which maybe follows the original markdown implementation. Maybe that trailing slash is for chumps. I'm leaving them throughout this post tho.
 
 His CSS:
 
