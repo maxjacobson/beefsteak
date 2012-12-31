@@ -84,7 +84,7 @@ Here's the rub: as flexible as CSS is, I have no idea how to style an `<hr />` s
 * According to [Prokop][], an image `<hr />` has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the `<hr />` in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
 * I've tried this in the past and it looked kind of lo-res and not great on a retina display
 
-[Prokop]: www.tizag.com/htmlT/htmlhr.php
+[Prokop]: http://www.tizag.com/htmlT/htmlhr.php
 
 I think these problems are surmountable by:
 
