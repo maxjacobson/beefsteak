@@ -12,7 +12,7 @@ Instead, this post is a bit of a follow up to [an earlier post][], so this secon
 
 ***It's time for [You're doing it wrong][]!***, the yearly column where I criticize people's blog's CSS even though I'm not an authority on that subject![^1]
 
-[^1]: I'm inspired in part by the dear, departed podcast [Hypercritical](http://5by5.tv/hypercritical), which good-naturedly criticized all kinds of stuff with the hopes that things might improve! I miss that show! [This drawing](http://davidgalletly.com/blog/2012/11/21/hypercritical-ends.html) is sweet as hell.
+[^1]: I'm inspired in part by the dear, departed podcast [Hypercritical](http://5by5.tv/hypercritical), which good-naturedly criticized all kinds of stuff with the hopes that things might improve. I miss that show! [This drawing](http://davidgalletly.com/blog/2012/11/21/hypercritical-ends.html) is sweet as hell.
 
 [You're doing it wrong]: http://www.maxjacobson.net/tag/youre-doing-it-wrong
 

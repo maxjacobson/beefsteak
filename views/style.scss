@@ -93,12 +93,14 @@ body, html {
   //  width: 100%;
   }
   .footnotes {
-    border-top: 1px;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-color: black;
-    border-style: dotted;
+    display: none;
+    // // alt style:
+    // border-top: 1px;
+    // border-left: 0;
+    // border-right: 0;
+    // border-bottom: 0;
+    // border-color: black;
+    // border-style: dotted;
   }
   .post_body {
     hr {
