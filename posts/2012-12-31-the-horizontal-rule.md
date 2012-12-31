@@ -18,11 +18,15 @@ Instead, this post is a bit of a follow up to [an earlier post][], so this secon
 
 Let's talk about lines.
 
-There aren't that many HTML tags, and markdown only supports the small subset that are relevant to writers. So let's make use of them.
+There aren't that many HTML tags, and markdown only supports the small subset that are relevant to writers, so it makes sense to make use of them.
 
-There are a few ways to make an `<hr>` in markdown. I tend to write `* * *` but it's flexible. You could use hyphens instead if you like and space them out if you like.
+Here's how you make a horizontal rule in markdown: `* * *`[^2]. This becomes the following HTML:
 
-In HTML, the horizontal rule looks like this: `<hr>`. On this blog, in a browser, at this time of writing, it looks like two thin lines on top of one another. The css I used for that looks like this:
+    <hr>
+
+[^2]: or `- - -` or `***` etc
+
+Which typically comes across as a horizontal line, depending on the CSS, and typically is meant to mark a new section. On this blog, in a browser, at this time of writing, it looks like two thin lines on top of one another. The CSS I used for that looks like this:
 
     hr {
       padding: 0;
@@ -32,16 +36,16 @@ In HTML, the horizontal rule looks like this: `<hr>`. On this blog, in a browser
 
 **Edit:** Actually, I've already changed it. The horizontal rules outside of the post body are still that, but the ones within post bodies are now stars as described below.
 
-CSS is really flexible. You can even style an `<hr>` as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr>`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
+CSS is really flexible. You can even style an hr as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style hrs. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
 
 [this one]: http://www.sovavsiti.cz/css/hr.html
 
-Considering how good `<hr>`s are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
+Considering how good hrs are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
 
 [Shawn Blanc]: http://shawnblanc.net/2012/12/inbox-intentions/
 [Stephen Hackett]: http://512pixels.net/2012/12/learning-curve/
 
-They get the appeal of a nice separating line but instead of using an `<hr>`, which is easy to make with markdown, which I think they both use, they do this:
+They get the appeal of a nice separating line but instead of using an hr, which is easy to make with markdown, which I think they both use, they do this:
 
     <div align="center">* * *</div>
 
@@ -49,7 +53,7 @@ or:
 
     <p style="text-align:center">* * *</p>
 
-Both commit the cardinal sin of embedding CSS in the middle of an HTML tag. You're not supposed to do that! Even if you don't want to use an `<hr>`, the correct move would be to [separate content and presentation][] by assigning a class and then selecting that class with the CSS, like so:
+Both commit the cardinal sin of embedding CSS in the middle of an HTML tag. You're not supposed to do that! Even if you don't want to use an hr, the correct move would be to [separate content and presentation][] by assigning a class and then selecting that class with the CSS, like so:
 
 The HTML:
 
@@ -71,7 +75,7 @@ If I'm reading a post outside of a browser, it's probably in Reeder or Instapape
 
 [it's just a couple of asterisks]: http://d.pr/i/yP1Y
 
-Had they used an `<hr>`, each individual reader would style it as they see fit, but they would understand what it is and work to convey your meaning.
+Had they used an hr, each individual reader would style it as they see fit, but they would understand what it is and work to convey your meaning.
 
 Besides, it's not that [semantic][] is it?
 
@@ -81,9 +85,9 @@ Blanc's p tag is most egregious in this regard, because p means *paragraph*, whi
 
 * * *
 
-Here's the rub: as flexible as CSS is, I have no idea how to style an `<hr>` so that it looks the way these guys seem to want it to look without embedding a small image at every `<hr>`, which introduces its own set of problems.
+Here's the rub: as flexible as CSS is, I have no idea how to style an hr so that it looks the way these guys seem to want it to look without embedding a small image at every hr, which introduces its own set of problems.
 
-* According to [Prokop][], an image `<hr>` has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the `<hr>` in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
+* According to [Prokop][], an image hr has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the hr in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
 * I've tried this in the past and it looked kind of lo-res and not great on a retina display
 
 [Prokop]: http://www.sovavsiti.cz/css/hr.html
