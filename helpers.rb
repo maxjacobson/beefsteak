@@ -151,6 +151,7 @@ def separate_metadata_and_text (text)
     tags_array = tags.split(/, /)
     tags_array.each do |t|
       t.gsub!(/ /, '-')
+      t.gsub!(/\'/, '')
       t.downcase!
     end
   else
