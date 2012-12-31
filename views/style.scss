@@ -94,19 +94,25 @@ body, html {
   }
   .footnotes {
     display: none;
-    // // alt style:
-    // border-top: 1px;
-    // border-left: 0;
-    // border-right: 0;
-    // border-bottom: 0;
-    // border-color: black;
-    // border-style: dotted;
   }
   .post_body {
     hr {
-      height: 13px;
-      background: url(/img/hr.png) no-repeat scroll center;
-      border: 0;
+      padding: 0;
+      margin: 0;
+      border: none;
+      text-align: center;
+      color: black;
+    }
+    hr:after {
+      //use hex value for unicode characters and escape with a leading slash
+      //here's a good list: http://www.danshort.com/HTMLentities/index.php?w=dingb
+      //the first example, scissors mid-cut, has this decimal value: `&#9985;`
+      //and this hex value: `&#x2701;` so we'd pull out `\2701`
+      //for a space, put: `\a0 ` (note the trailing space)
+      //http://stackoverflow.com/questions/190396/adding-html-entities-using-css-content
+      content: "\273F\a0 \273F\a0 \273F";
+      position: relative;
+      top: -0.5em;
     }
   }
   .meta {

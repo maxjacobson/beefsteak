@@ -2,7 +2,7 @@ title: the horizontal rule
 date: 2012-12-31
 time: 4:29 AM
 category: the internet
-tags: youre doing it wrong, css, html, blogs
+tags: youre doing it wrong, css, html, blogs, instapaper
 
 On a sexier and perhaps better blog, this post title would be a euphemism.
 
@@ -83,7 +83,7 @@ Blanc's p tag is most egregious in this regard, because p means *paragraph*, whi
 
 [semantic]: http://stackoverflow.com/questions/1294493/what-does-semantically-correct-mean
 
-* * *
+### styling the hr with an image
 
 Here's the rub: as flexible as CSS is, I have no idea how to style an hr so that it looks the way these guys seem to want it to look without embedding a small image at every hr, which introduces its own set of problems.
 
@@ -115,7 +115,69 @@ The image could be anything but [here's one][] I just whipped up in pixelmator w
 
 [here's one]: http://d.pr/i/AoSz
 
-This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway. His horizontal rule looks like three pale centered dots and doesn't use an image.
+### Edit: styling the hr with pseudo-elements
+
+**Edit 2:** I love writing posts like this because I end up learning a lot. I especially love realizing how little I understood it at the beginning. I've removed the image-based-stars and replaced them with something different, something better.
+
+Now no images are required at all! I realized while loading the dishes that I had cited an example earlier that used the `:after` pseudo-element to insert a glyph into an hr, so why couldn't we do the same with Hackett and Blanc's beloved asterisks? We can! It looks like this:
+
+The HTML:
+
+    <hr>
+
+The CSS:
+
+    hr {
+      padding: 0;
+      margin: 0;
+      border: none;
+      text-align: center;
+      color: black;
+    }
+    hr:after {
+      content: "* * *";
+      position: relative;
+      top: -0.5em;
+    }
+
+This is a thinly-modified take on Harry Robert's Glyph style from that [earlier link (example eight)](http://css-tricks.com/examples/hrs/).
+
+Isn't that great! You can use a standard markdown (or HTML or anything) hr to make some centered asterisks show up automatically.
+
+Of course I wanted to experiment and try inserting some other characters in there. This is my first experience with the `:after` CSS rule and unsurprisingly it's a can of worms. I attempted to replace `content: "* * *";` with `content: "✿";`, pasting the unicode black florette character directly into the CSS, and there were bonkers errors. The sass compiler just freaked out and killed the whole stylesheet. So, looking at [this terriffic HTML entity reference](http://www.danshort.com/HTMLentities/index.php?w=dingb), I went for the familiar-looking code decimal correspondent, `&#10047;`, wearing those comfy ampersand-semicolon mittens (etsy, get on that). That totally didn't work either so I ignored the third column and went googling. I came upon [this great stack overflow answer](http://stackoverflow.com/a/8595802) which set me straight.
+
+Now my CSS looks like this (and I promise to walk away and stop changing it for a day or two):
+
+    hr {
+      padding: 0;
+      margin: 0;
+      border: none;
+      text-align: center;
+      color: black;
+    }
+    hr:after {
+      content: "\273F\a0 \273F\a0 \273F";
+      position: relative;
+      top: -0.5em;
+    }
+
+If you're like me you're like the fuck is that.
+
+That's the third column I ignored, hex code! `\273F` corresponds to that black florette and `\a0 ` corresponds to a space. Isn't that terrifically fussy?? You must pull out the hex number and add a leading `\` as an escape to avoid errors.
+
+Regarding using CSS to insert content into an hr, Chris Coyier [writes](http://css-tricks.com/simple-styles-for-horizontal-rules/):
+
+> Note that in some of these examples, generated content is used (:before/:after). This isn't supposed to work, as far as I know, because <hr>s are no-content style elements (they have no closing tag). But as you can see, it does. If you are concerned about uber-long-term design fidelity, stay away from those.
+
+To which I say: *kewl bruh whatever tho*.
+
+Here's an hr with this style:
+
+* * *
+
+This opens you up to use actual stars (or any other unicode character) instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule[^3], which isn't really so bad. It's good enough for [John Gruber][] anyway. His horizontal rule looks like three pale centered dots.
+
+[^3]: Edit: or maybe not? Keep reading...
 
 His CSS:
 
@@ -131,3 +193,23 @@ His CSS:
 [John Gruber]: http://daringfireball.net/2012/12/google_maps_iphone
 
 I don't really understand how that becomes three pale dots but then I don't really understand CSS.
+
+### Edit 3: I was wrong about instapaper
+
+*Completely* wrong! I made some bad assumptions and now I'm really confused.
+
+In the first draft of this post, I had this scattered throughout my paragraphs anywhere you see "hr" or "hrs" above:
+
+    <code>&lt;hr /&gt;</code>
+
+Which is what my markdown processor, Kramdown, generates when I write this:
+
+    `<hr />`
+
+It wraps it in the code tags *and* replaces the angle brackets with their HTML entities, with the goal to make sure it's not recognized as a horizontal rule, but as anonymous, quoted code. Despite these precautions, Instapaper rendered those as horizontal rules, [awkwardly breaking up paragraphs](http://d.pr/i/4wEm) instead of displaying the code's text inline.
+
+That behavior may make sense in some contexts, but not really in this one. So I went through and removed the brackets, despite it looking kind of goofy without them. But this post was ostensibly about writing blog posts with things like Instapaper in mind, and I wanted it to be readable in there.
+
+What's even more baffling is that hrs that *weren't* inline with paragraphs wouldn't display at all. Just regular plain old hrs. Not on Daring Fireball and not on here. For a parser that is so aggressive as to forcibly render hrs that don't want to be, it's bizarre that it ignores the ones with their hand raised.
+
+So, I dunno. I'm pleased that I managed to find a CSS replacement for Blanc and Hackett's vibe, but now I'm not sure if they were doing it wrong at all. At least theirs show up.
