@@ -45,7 +45,7 @@ get '/~:page' do
     page = separate_page_info(the_text)
     @subtitle = page[:title]
     the_html << "<div class=\"instapaper_body\">\n" + Kramdown::Document.new(page[:text]).to_html + "\n</div>\n"
-    the_html << "\n<hr />\n<p><a href=\"/~#{naked_filename}.md\"><img src=\"/img/md.png\" /> Markdown source of this page</a></p>\n"
+    the_html << "<div class=\"meta\">\n<p><a href=\"/~#{naked_filename}.md\"><img src=\"/img/md.png\" /> Markdown source of this page</a></p>\n</div>\n"
   elsif File.exists?("pages/#{params[:page].to_s}")
     source_filename = params[:page].to_s
     without_md = source_filename.sub(/.md/, '')
@@ -164,9 +164,9 @@ get '/posts' do
     @subtitle = "posts"
   end
 
-  if include_cat_cloud? or include_tag_cloud?
-    the_html << "<hr />\n"
-  end
+  # if include_cat_cloud? or include_tag_cloud?
+  #   the_html << "<hr />\n"
+  # end
 
   if include_cat_cloud?
     the_html << "<p>categories: "
@@ -239,7 +239,7 @@ get '/category/:category' do
   end
   the_html << "  </ul>\n"
   @secondary_feed = "/category/#{the_category}/feed"
-  the_html << "  <p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_category)} category</a></p>\n"
+  the_html << "  <div class=\"meta\">\n<p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_category)} category</a></p>\n</div>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -279,7 +279,7 @@ get '/tag/:tag' do
   end
   the_html << "  </ul>\n"
   @secondary_feed = "/tag/#{the_tag}/feed"
-  the_html << "  <p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_tag)} tag</a></p>\n"
+  the_html << "  <div class=\"meta\">\n<p><a href=\"#{@secondary_feed}\">get the RSS feed for the #{unhyphenate(the_tag)} tag</a></p>\n</div>\n"
   if the_html =~ /<li>/
     erb the_html
   else
@@ -301,7 +301,7 @@ get '/*.md' do
     the_text.gsub!(/</, '&lt;')
     the_text.gsub!(/>/,'&gt;')
     @subtitle = "markdown source of #{post_info[:title]}"
-    erb "<pre>\n" + the_text + "\n</pre>\n<p><a href=\"#{naked_filename}\">Back to <span class=\"underline\">#{post_info[:title]}</span></a> post.</p>"
+    erb "<pre>\n" + the_text + "\n</pre>\n<div class=\"meta\">\n<p><a href=\"#{naked_filename}\">Back to <span class=\"underline\">#{post_info[:title]}</span></a> post.</p>\n</div>\n"
   else
     @error_page = naked_filename + ".md"
     @subtitle = "404"
@@ -353,7 +353,7 @@ get '/search' do
     @subtitle = "No search results for " + query
   end
   @secondary_feed = "/search/#{query.gsub(/ /, '-')}/feed"
-  the_html << "<p><a href=\"#{@secondary_feed}\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n"
+  the_html << "<div class=\"meta\">\n<p><a href=\"#{@secondary_feed}\">get the RSS feed for the search: #{unhyphenate(query)}</a></p>\n</div>\n"
   erb the_html
 end
 
@@ -477,7 +477,7 @@ get '/*' do
     post_info = separate_metadata_and_text(the_text)
     the_html << "<p id=\"date\">Posted #{post_info[:relative_date]} ago at #{post_info[:time]} on #{post_info[:month_word]} #{post_info[:day]}, #{post_info[:year]}</p>\n"
     the_html << "<div class=\"instapaper_body post_body\">\n" + Kramdown::Document.new(post_info[:text]).to_html + "\n</div>\n"
-    the_html << "<div class=\"post_meta\">\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
+    the_html << "<div class=\"meta\">\n<p>Category: <a href=\"/category/#{post_info[:category]}\">#{unhyphenate(post_info[:category])}</a></p>"
     if post_info[:tags_array].length > 0
       the_html << "<p>Tags: "
       i = 1
