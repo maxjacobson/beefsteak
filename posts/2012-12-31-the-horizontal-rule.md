@@ -30,14 +30,14 @@ In HTML, the horizontal rule looks like this: `<hr />`. On this blog, in a brows
       border-top: medium double #333;
     }
 
-CSS is really flexible. You can even replace an `<hr />` with an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
+CSS is really flexible. You can even style an `<hr />` as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
 
 [this one]: http://www.tizag.com/htmlT/htmlhr.php
 
 Considering how good `<hr />`s are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
 
 [Shawn Blanc]: http://shawnblanc.net/2012/12/inbox-intentions/
-[Stephen Hackett]: http://shawnblanc.net/2012/12/inbox-intentions/
+[Stephen Hackett]: http://512pixels.net/2012/12/learning-curve/
 
 They get the appeal of a nice separating line but instead of using an `<hr />`, which is easy to make with markdown, which I think they both use, they do this:
 
@@ -109,7 +109,7 @@ The image could be anything but [here's one][] I just whipped up in pixelmator w
 
 [here's one]: http://d.pr/i/AoSz
 
-This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>` without the closing slash that I think is a relatively recent convention. His rule looks like three pale centered dots and doesn't use an image.
+This opens you up to use actual stars instead of asterisks! I call that an upgrade. And if you turn CSS off or Instapaper it, it degrades nicely to a plain old horizontal rule, which isn't really so bad. It's good enough for [John Gruber][] anyway, who writes simply `<hr>` without the closing slash which I think is a relatively recent convention. His rule looks like three pale centered dots and doesn't use an image.
 
 His CSS:
 
@@ -124,4 +124,4 @@ His CSS:
 
 [John Gruber]: http://daringfireball.net/2012/12/google_maps_iphone
 
-I don't really understand how that becomes three pale dots but then I don't really know anything about CSS.
+I don't really understand how that becomes three pale dots but then I don't really understand CSS.
