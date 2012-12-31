@@ -32,7 +32,7 @@ In HTML, the horizontal rule looks like this: `<hr />`. On this blog, in a brows
 
 CSS is really flexible. You can even style an `<hr />` as an image. The blog post that I'm constantly googling for is [this one][] by Marek Prokop which gives a great introduction to the different ways you can style `<hr />`s. Heres [another](http://css-tricks.com/examples/hrs/), from which I more or less cribbed their last example.
 
-[this one]: http://www.tizag.com/htmlT/htmlhr.php
+[this one]: http://www.sovavsiti.cz/css/hr.html
 
 Considering how good `<hr />`s are, I don't understand why bloggers like [Shawn Blanc][] and [Stephen Hackett][] (whom I generally like), don't use them.
 
@@ -84,7 +84,7 @@ Here's the rub: as flexible as CSS is, I have no idea how to style an `<hr />` s
 * According to [Prokop][], an image `<hr />` has visual bugs in IE and Opera, so he resorts to a bit of a hack, namely wrapping the `<hr />` in a div with some additional rules, which is a bit of a nonstarter for markdown users -- we need something that automatically expands from `* * *` and looks right.
 * I've tried this in the past and it looked kind of lo-res and not great on a retina display
 
-[Prokop]: http://www.tizag.com/htmlT/htmlhr.php
+[Prokop]: http://www.sovavsiti.cz/css/hr.html
 
 I think these problems are surmountable by:
 
