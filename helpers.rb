@@ -3,7 +3,7 @@ def get_pages_for_header
   pages = Dir.entries("pages")
   pages.sort!
   if pages.length > 2
-    the_html << "<div class=\"pages_list\"><ul>\n"
+    the_html << "<div class=\"pages_list\">\n<ul>\n"
     the_html << "  <li><a href=\"/\">links</a></li>\n"
     the_html << "  <li><a href=\"/posts\">posts</a></li>\n"
     pages.each do |filename|

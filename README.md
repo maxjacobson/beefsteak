@@ -21,12 +21,12 @@ Do whatever you want. It's as-is, etc.
 
 ## todos and notes to self
 
-* should the pages include a tilde? could just combine the ~ get into the `get /*` and first check if the file exists in `/posts` and if so, make a post, then check if it exists in `/pages` and if so make a page... hrm
-* if the date for something is in the future, don't show it until then
-* maybe include public pinboard links ala a link blog?
-* maybe adapt for use as a podcast host / feed generator? Or add an option to include that? I can feel my butthole tightening as I consider those complications
-* consider amending the HTML head to refer to the secondary feeds when on category/tag/search pages
-* allow single quotes in search not just double quotes
-* sort search results by relevance, maybe include a little snippet that matches???
-* should search also check pages? probably not, right? just checking posts is probably fine
-* feeds for search queries... seem to ignore quoted queries. is that cool? consider fixing that
+* [ ] should the pages include a tilde? could just combine the ~ get into the `get /*` and first check if the file exists in `/posts` and if so, make a post, then check if it exists in `/pages` and if so make a page... hrm
+* [ ] if the date for something is in the future, don't show it until then
+* [x] maybe include public pinboard links ala a link blog?
+* [ ] maybe adapt for use as a podcast host / feed generator? Or add an option to include that? I can feel my butthole tightening as I consider those complications
+* [x] consider amending the HTML head to refer to the secondary feeds when on category/tag/search pages
+* [ ] allow single quotes in search not just double quotes
+* [ ] sort search results by relevance, maybe include a little snippet that matches???
+* [ ] should search also check pages? probably not, right? just checking posts is probably fine
+* [ ] feeds for search queries... seem to ignore quoted queries. is that cool? consider fixing that
