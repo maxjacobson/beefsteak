@@ -19,6 +19,21 @@ th {
 td {
   padding: 8px;
 }
+tbody {
+  tr:hover {
+    td {
+      background-color:#C8F1F7;
+    }
+  }
+}
+
+th+th {
+  border-left: 2px solid black;
+}
+
+td+td {
+  border-left: 2px solid black;
+}
 
 a {
   text-decoration: none;
