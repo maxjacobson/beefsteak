@@ -4,6 +4,9 @@ body, html {
   margin: 0 auto;
   background-color: #498274;
   font-family: sans-serif;
+  table, th, td {
+    border: 1px solid black;
+  }
   a {
     text-decoration: none;
     font-weight: bold;
