@@ -68,6 +68,9 @@ hr {
 .post_body {
   img {
     width: 90%;
+    padding: 5px;
+    border: 1px dashed black;
+    box-shadow: 3px 3px 4px #BEBAD1;
   }
 }
 pre, code {
