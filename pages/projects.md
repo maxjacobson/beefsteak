@@ -4,7 +4,7 @@ Some things you can check out:
 
 ### web apps
 
-* [layabout](http://layabout.maxjacobson.net) -- for instapaper subscribers who like video
+* [layabout](http://www.layabout.tv) -- for instapaper subscribers who like video
 * [smash cut](http://smashcutapp.com) -- coming soon??
 * [beefsteak](http://github.com/maxjacobson/beefsteak) the blogging engine you're lookin' at.)
 
