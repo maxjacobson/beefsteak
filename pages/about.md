@@ -10,5 +10,5 @@ Here's me elsewhere on the internet:
 * [ADN](http://alpha.app.net/maxjacobson)
 * [instagram](http://instagram.com/maxjacobson)
 * [facebook](http://facebook.com/jacobson)
-* [github](http:/github.com/maxjacobson)
+* [github](http://github.com/maxjacobson)
 * [pinboard](http://pinboard.in/u:maxjacobson)
