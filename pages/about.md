@@ -12,3 +12,4 @@ Here's me elsewhere on the internet:
 * [facebook](http://facebook.com/jacobson)
 * [github](http://github.com/maxjacobson)
 * [pinboard](http://pinboard.in/u:maxjacobson)
+* [linkedin](http://www.linkedin.com/in/maxjacobson1)
