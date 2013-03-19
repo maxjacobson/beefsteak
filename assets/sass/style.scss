@@ -7,7 +7,7 @@ html {
 }
 
 p, li, ul, h1, h2, h3 {
-  overflow: auto;
+  white-space: pre-wrap;
   margin: 5px 0;
 }
 
