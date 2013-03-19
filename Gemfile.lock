@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    haml (4.0.0)
+      tilt
     kramdown (1.0.1)
     rack (1.5.2)
     shotgun (0.9)
@@ -14,6 +16,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   kramdown
   shotgun
   sinatra
