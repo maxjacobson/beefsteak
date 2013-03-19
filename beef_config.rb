@@ -12,7 +12,7 @@ def get_beef()
   beef.number_of_links = 55
   beef.hot_tags = [
     "max_jacobson", "layabout", "beefsteak"
-  ] # hot tags show up bolder and redder
+  ] # links with hot tags are emphasized
 
   # specifically for the RSS feed
   beef.description = "The devblog of Max Jacobson"
