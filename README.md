@@ -20,6 +20,17 @@ Mine is online at <http://www.maxjacobson.net>
     * go to <http://localhost:9393>
 * commit and push to heroku
 
+## thx
+
+* Dan Eden's [animate.css](http://daneden.me/animate)
+* [google code prettify](http://code.google.com/p/google-code-prettify/)
+* [jquery](http://jquery.com)
+* [coffeescript](http://coffeescript.org)
+* [calepin](http://calepin.co/) -- my old blog was on there and they announced they were shutting down, so I built this... but they're still there. this copies that in a lot of ways.
+* [pinboard](http://pinboard.in) -- i feel like I'm abusing it a bit
+* markdown and specifically the implementation I'm using, [kramdown](http://kramdown.rubyforge.org/)
+* [pearl white](http://books.google.com/books?id=shP4ZC-Bo0IC&lpg=PA53&dq=%22beefsteak%20and%20aviation%22&pg=PA53#v=onepage&q=%22beefsteak%20and%20aviation%22&f=false)
+
 ## todos and notes to self
 
 I just rewrote the whole thing and some features need to be re-implemented still.
