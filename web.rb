@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'haml'
 require 'kramdown'
 require_relative 'beef_config'
 
