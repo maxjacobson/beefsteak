@@ -16,7 +16,7 @@ Had they copied the embed code from beneath the YouTube video, they would have g
 
     <iframe width="560" height="315" src="http://www.youtube.com/embed/Yww4BLjReEk" frameborder="0" allowfullscreen></iframe>
 
-I don't know where The AV Club got their embed code, but exhibit A for it's outdatedness is the `pluginspage="http://www.macromedia.com/go/getflashplayer"` parameter. Try going to that page. Because Macromedia doesn't exist anymore, you'll be redirected to Flash's new owner, Adobe. This post is from three days ago; Adobe acquired Macromedia seven years ago.
+I don't know where The AV Club got their embed code, but exhibit A for it's outdatedness is the macromedia reference. Try going to that page. Because Macromedia doesn't exist anymore, you'll be redirected to Flash's new owner, Adobe. This post is from three days ago; Adobe acquired Macromedia seven years ago.
 
 Also: every video they embed is given the dimensions 425x344, without regard to the video's aspect ratio. YouTube's provided embed code is dimensions-aware and doesn't introduce unnecessary letterboxing.
 
