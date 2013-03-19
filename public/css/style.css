@@ -135,61 +135,64 @@ img {
 /* line 63, ../../assets/sass/style.scss */
 pre {
   font-family: "monaco", monospace;
-}
-
-/* line 66, ../../assets/sass/style.scss */
-code {
   overflow: auto;
 }
 
-/* line 70, ../../assets/sass/style.scss */
+/* line 67, ../../assets/sass/style.scss */
+code {
+  font-family: "monaco", monospace;
+  background-color: pink;
+  overflow: auto;
+}
+
+/* line 73, ../../assets/sass/style.scss */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* line 75, ../../assets/sass/style.scss */
+/* line 78, ../../assets/sass/style.scss */
 th {
   padding: 10px 8px;
   border-bottom: 2px solid black;
 }
 
-/* line 80, ../../assets/sass/style.scss */
+/* line 83, ../../assets/sass/style.scss */
 td {
   padding: 8px;
 }
 
-/* line 85, ../../assets/sass/style.scss */
+/* line 88, ../../assets/sass/style.scss */
 tbody tr:hover td {
   background-color: #C8F1F7;
 }
 
-/* line 91, ../../assets/sass/style.scss */
+/* line 94, ../../assets/sass/style.scss */
 th + th {
   border-left: 2px solid black;
 }
 
-/* line 95, ../../assets/sass/style.scss */
+/* line 98, ../../assets/sass/style.scss */
 td + td {
   border-left: 2px solid black;
 }
 
-/* line 99, ../../assets/sass/style.scss */
+/* line 102, ../../assets/sass/style.scss */
 #nav {
   text-align: right;
 }
 
-/* line 103, ../../assets/sass/style.scss */
+/* line 106, ../../assets/sass/style.scss */
 #date {
   background-color: #FFE2C6;
 }
 
-/* line 107, ../../assets/sass/style.scss */
+/* line 110, ../../assets/sass/style.scss */
 .pin-item {
   margin-bottom: 1em;
 }
 
-/* line 111, ../../assets/sass/style.scss */
+/* line 114, ../../assets/sass/style.scss */
 .super_hot {
   background-color: white;
   margin-bottom: 2em;
@@ -197,18 +200,18 @@ td + td {
   box-shadow: 0 0 5px 5px #888;
 }
 
-/* line 118, ../../assets/sass/style.scss */
+/* line 121, ../../assets/sass/style.scss */
 .footnote {
   vertical-align: super;
   font-size: 65%;
 }
 
-/* line 123, ../../assets/sass/style.scss */
+/* line 126, ../../assets/sass/style.scss */
 .footnotes {
   border-top: dashed black 1px;
 }
 
-/* line 128, ../../assets/sass/style.scss */
+/* line 131, ../../assets/sass/style.scss */
 .yield hr {
   padding: 0;
   margin: 1em 0;
@@ -216,7 +219,7 @@ td + td {
   text-align: center;
   color: black;
 }
-/* line 134, ../../assets/sass/style.scss */
+/* line 137, ../../assets/sass/style.scss */
 .yield hr:after {
   content: "\273F\a0 \273F\a0 \273F";
   position: relative;
@@ -224,13 +227,13 @@ td + td {
 }
 
 @media only screen and (max-width: 450px) {
-  /* line 143, ../../assets/sass/style.scss */
+  /* line 146, ../../assets/sass/style.scss */
   body {
     width: 99%;
     box-shadow: 0;
   }
 
-  /* line 147, ../../assets/sass/style.scss */
+  /* line 150, ../../assets/sass/style.scss */
   h1, h2 {
     overflow: auto;
   }

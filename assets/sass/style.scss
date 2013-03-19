@@ -62,8 +62,11 @@ img {
 
 pre {
   font-family: "monaco", monospace;
+  overflow: auto;
 }
 code {
+  font-family: "monaco", monospace;
+  background-color: pink;
   overflow: auto;
 }
 
