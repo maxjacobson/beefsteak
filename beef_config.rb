@@ -23,6 +23,7 @@ def get_beef()
 
   # google analytics
   beef.analytics = true
+  # beef.analytics = false
   beef.analytics_id = "UA-4982721-9"
 
   # beef.copyright = true # for generic (eg "(c) Max Jacobson 2013", with your name and current year)

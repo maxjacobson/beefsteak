@@ -9,6 +9,14 @@
     %title= @beef.title
   -else
     %title= "#{@subtitle} | #{@beef.title}"
+  %link{:href => "/img/favicon.ico", :type => "image/x-icon", :rel => "icon"}
+  %link{:href => "/img/apple-touch-icon.png", :rel => "apple-touch-icon-precomposed"}
+  %meta{:name => "author", :content => @beef.author}
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, user-scalable=no"}
+  %meta{:name => "HandheldFriendly", :content => "true"}
+  -if @beef.analytics
+    %script{:type => "text/javascript"}= "/*analytics*/var _gaq=_gaq||[];_gaq.push([\"_setAccount\",\"#{@beef.analytics_id}\"]);_gaq.push([\"_trackPageview\"]);(function(){var e=document.createElement(\"script\");e.type=\"text/javascript\";e.async=true;e.src=(\"https:\"==document.location.protocol?\"https://ssl\":\"http://www\")+\".google-analytics.com/ga.js\";var t=document.getElementsByTagName(\"script\")[0];t.parentNode.insertBefore(e,t)})()"
+
 %body
   %header
     %h1= @beef.title.downcase
