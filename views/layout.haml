@@ -30,7 +30,7 @@
         -@beef.pages.each do |page|
           %a{:href => page[:url]}= page[:title]
   %hr
-  .yield{:style => 'display: none'}
+  .yield
     =yield
   .buffer{:style => 'height: 1000px'}
   %hr

@@ -69,13 +69,18 @@ html {
 }
 
 /* line 9, ../../assets/sass/style.scss */
+.yield {
+  display: none;
+}
+
+/* line 13, ../../assets/sass/style.scss */
 p, li, ul, h1, h2, h3 {
   margin: 5px 0;
   line-height: 1.3em;
   word-break: hyphenate;
 }
 
-/* line 15, ../../assets/sass/style.scss */
+/* line 19, ../../assets/sass/style.scss */
 body {
   background-color: white;
   width: 450px;
@@ -85,61 +90,61 @@ body {
   box-shadow: 3px 3px 4px black;
 }
 
-/* line 24, ../../assets/sass/style.scss */
+/* line 28, ../../assets/sass/style.scss */
 a {
   text-decoration: none;
   font-weight: bold;
   color: #823046;
 }
-/* line 28, ../../assets/sass/style.scss */
+/* line 32, ../../assets/sass/style.scss */
 a:hover {
   text-decoration: underline;
 }
 
-/* line 33, ../../assets/sass/style.scss */
+/* line 37, ../../assets/sass/style.scss */
 h1 {
   font-size: 3em;
 }
 
-/* line 37, ../../assets/sass/style.scss */
+/* line 41, ../../assets/sass/style.scss */
 h2 {
   font-size: 2em;
   margin: 1em 0;
   text-align: center;
 }
 
-/* line 43, ../../assets/sass/style.scss */
+/* line 47, ../../assets/sass/style.scss */
 h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-/* line 48, ../../assets/sass/style.scss */
+/* line 52, ../../assets/sass/style.scss */
 ol li {
   list-style-type: decimal;
 }
 
-/* line 54, ../../assets/sass/style.scss */
+/* line 58, ../../assets/sass/style.scss */
 ul li {
   list-style-type: circle;
 }
-/* line 57, ../../assets/sass/style.scss */
+/* line 61, ../../assets/sass/style.scss */
 ul li ul li {
   list-style-type: disc;
 }
 
-/* line 64, ../../assets/sass/style.scss */
+/* line 68, ../../assets/sass/style.scss */
 li {
   margin-left: 1.5em;
 }
 
-/* line 68, ../../assets/sass/style.scss */
+/* line 72, ../../assets/sass/style.scss */
 hr {
   padding: 0;
   border: none;
   border-top: medium double #333333;
 }
 
-/* line 74, ../../assets/sass/style.scss */
+/* line 78, ../../assets/sass/style.scss */
 img {
   width: 90%;
   padding: 5px;
@@ -147,76 +152,76 @@ img {
   box-shadow: 3px 3px 4px #bebad1;
 }
 
-/* line 81, ../../assets/sass/style.scss */
+/* line 85, ../../assets/sass/style.scss */
 pre {
   font-family: "monaco", monospace;
   overflow: auto;
 }
 
-/* line 85, ../../assets/sass/style.scss */
+/* line 89, ../../assets/sass/style.scss */
 code {
   white-space: pre-wrap;
   font-family: "monaco", monospace;
 }
 
-/* line 90, ../../assets/sass/style.scss */
+/* line 94, ../../assets/sass/style.scss */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* line 95, ../../assets/sass/style.scss */
+/* line 99, ../../assets/sass/style.scss */
 strong {
   font-weight: bold;
 }
 
-/* line 98, ../../assets/sass/style.scss */
+/* line 102, ../../assets/sass/style.scss */
 em {
   font-style: italic;
 }
 
-/* line 102, ../../assets/sass/style.scss */
+/* line 106, ../../assets/sass/style.scss */
 th {
   padding: 10px 8px;
   border-bottom: 2px solid black;
 }
 
-/* line 107, ../../assets/sass/style.scss */
+/* line 111, ../../assets/sass/style.scss */
 td {
   padding: 8px;
 }
 
-/* line 112, ../../assets/sass/style.scss */
+/* line 116, ../../assets/sass/style.scss */
 tbody tr:hover td {
   background-color: #C8F1F7;
 }
 
-/* line 118, ../../assets/sass/style.scss */
+/* line 122, ../../assets/sass/style.scss */
 th + th {
   border-left: 2px solid black;
 }
 
-/* line 122, ../../assets/sass/style.scss */
+/* line 126, ../../assets/sass/style.scss */
 td + td {
   border-left: 2px solid black;
 }
 
-/* line 126, ../../assets/sass/style.scss */
+/* line 130, ../../assets/sass/style.scss */
 #nav {
   text-align: right;
 }
 
-/* line 130, ../../assets/sass/style.scss */
+/* line 134, ../../assets/sass/style.scss */
 #date {
   background-color: #FFE2C6;
 }
 
-/* line 134, ../../assets/sass/style.scss */
+/* line 138, ../../assets/sass/style.scss */
 .pin-item {
   margin-bottom: 1em;
 }
 
-/* line 138, ../../assets/sass/style.scss */
+/* line 142, ../../assets/sass/style.scss */
 .super_hot {
   background-color: white;
   margin-bottom: 2em;
@@ -224,18 +229,18 @@ td + td {
   box-shadow: 0 0 5px 5px #888888;
 }
 
-/* line 145, ../../assets/sass/style.scss */
+/* line 149, ../../assets/sass/style.scss */
 .footnote {
   vertical-align: super;
   font-size: 65%;
 }
 
-/* line 150, ../../assets/sass/style.scss */
+/* line 154, ../../assets/sass/style.scss */
 .footnotes {
   border-top: dashed black 1px;
 }
 
-/* line 155, ../../assets/sass/style.scss */
+/* line 159, ../../assets/sass/style.scss */
 .yield hr {
   padding: 0;
   margin: 1em 0;
@@ -243,7 +248,7 @@ td + td {
   text-align: center;
   color: black;
 }
-/* line 161, ../../assets/sass/style.scss */
+/* line 165, ../../assets/sass/style.scss */
 .yield hr:after {
   content: "\273F\a0 \273F\a0 \273F";
   position: relative;
@@ -251,7 +256,7 @@ td + td {
 }
 
 @media only screen and (max-width: 450px) {
-  /* line 170, ../../assets/sass/style.scss */
+  /* line 174, ../../assets/sass/style.scss */
   body {
     width: 90%;
     box-shadow: 0;
