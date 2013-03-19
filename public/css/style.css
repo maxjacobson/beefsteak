@@ -70,8 +70,8 @@ html {
 
 /* line 9, ../../assets/sass/style.scss */
 p, li, ul, h1, h2, h3 {
-  overflow: auto;
   margin: 5px 0;
+  word-break: hyphenate;
 }
 
 /* line 14, ../../assets/sass/style.scss */
