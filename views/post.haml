@@ -1,5 +1,5 @@
 %h2= @post[:title]
-%span#date= "posted #{@post[:diff]} on #{@post[:date].strftime("%b %d, %Y at %I:%m %p")}"
+%p#date= "posted #{@post[:diff]} on #{@post[:date].strftime("%b %d, %Y at %I:%m %p")}"
 .post
   =@post[:html]
 %p

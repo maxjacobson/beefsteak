@@ -71,10 +71,11 @@ html {
 /* line 9, ../../assets/sass/style.scss */
 p, li, ul, h1, h2, h3 {
   margin: 5px 0;
+  line-height: 1.3em;
   word-break: hyphenate;
 }
 
-/* line 14, ../../assets/sass/style.scss */
+/* line 15, ../../assets/sass/style.scss */
 body {
   background-color: white;
   width: 450px;
@@ -84,51 +85,50 @@ body {
   box-shadow: 3px 3px 4px black;
 }
 
-/* line 23, ../../assets/sass/style.scss */
+/* line 24, ../../assets/sass/style.scss */
 a {
   text-decoration: none;
   font-weight: bold;
   color: #823046;
 }
-/* line 27, ../../assets/sass/style.scss */
+/* line 28, ../../assets/sass/style.scss */
 a:hover {
   text-decoration: underline;
 }
 
-/* line 32, ../../assets/sass/style.scss */
+/* line 33, ../../assets/sass/style.scss */
 h1 {
   font-size: 3em;
 }
 
-/* line 36, ../../assets/sass/style.scss */
+/* line 37, ../../assets/sass/style.scss */
 h2 {
   font-size: 2em;
   margin: 1em 0;
   text-align: center;
 }
 
-/* line 42, ../../assets/sass/style.scss */
+/* line 43, ../../assets/sass/style.scss */
 h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-/* line 47, ../../assets/sass/style.scss */
+/* line 48, ../../assets/sass/style.scss */
 ol li {
   list-style-type: decimal;
 }
 
-/* line 53, ../../assets/sass/style.scss */
+/* line 54, ../../assets/sass/style.scss */
 ul li {
   list-style-type: circle;
 }
-/* line 56, ../../assets/sass/style.scss */
+/* line 57, ../../assets/sass/style.scss */
 ul li ul li {
   list-style-type: disc;
 }
 
-/* line 63, ../../assets/sass/style.scss */
+/* line 64, ../../assets/sass/style.scss */
 li {
-  line-height: 1.3em;
   margin-left: 1.5em;
 }
 
