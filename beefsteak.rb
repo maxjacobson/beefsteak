@@ -37,6 +37,21 @@ class Beefsteak
     return @posts.sort_by{|post| post[:date]}.reverse
   end
 
+  def tag_note(tag)
+    if File.exists?("notes/tag/#{tag}.md")
+      return File.open("notes/tag/#{tag}.md").read
+    else
+      return false
+    end
+  end
+  def category_note(cat)
+    if File.exists?("notes/category/#{cat}.md")
+      return File.open("notes/category/#{cat}.md").read
+    else
+      return false
+    end
+  end
+
   def posts_with_tag(tag)
     @posts = self.posts if @posts.nil?
     return @posts.keep_if{|post| post[:tags].include? tag}
@@ -183,6 +198,12 @@ class Beefsteak
         return "#{years} years and #{secs_to_str(secs_spillover)} ago"
       end
     end
+  end
+  def hyphenate (str)
+    return str.gsub(/\s+/, '-')
+  end
+  def unhyphenate (str)
+    return str.gsub(/\-/, ' ')
   end
 
 end

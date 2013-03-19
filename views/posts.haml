@@ -8,8 +8,8 @@
 %h3 category cloud
 %p
   -@beef.clouds[:cats].each do |k, v|
-    %a{:href => "/category/#{k}"}= "#{k} (#{v})"
+    %a{:href => "/category/#{k}"}= "#{@beef.unhyphenate(k)} (#{v})"
 %h3 tag cloud
 %p
   -@beef.clouds[:tags].each do |k, v|
-    %a{:href => "/tag/#{k}"}= "#{k} (#{v})"
+    %a{:href => "/tag/#{k}"}= "#{@beef.unhyphenate(k)} (#{v})"

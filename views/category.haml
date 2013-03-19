@@ -1,11 +1,13 @@
-%h2= "posts with #{@category} category"
+%h2= "posts with #{@beef.unhyphenate(@category)} category"
+-if @note
+  %p= @note
 %ul
   -@beef.posts_with_category(@category).each do |post|
     %li
       %a{:href => post[:url]}= "#{post[:title]}"
       %span#date= "posted #{post[:diff]}"
 %hr
-%h3= "#{@category} posts have these tags"
+%h3= "#{@beef.unhyphenate(@category)} posts have these tags"
 %p
   -@beef.clouds[:tags].each do |k, v|
-    %a{:href => "/tag/#{k}"}= "#{k} (#{v})"
+    %a{:href => "/tag/#{k}"}= "#{@beef.unhyphenate(k)} (#{v})"

@@ -69,6 +69,7 @@ end
 get '/tag/:tag' do
   @tag = params[:tag]
   @beef = get_beef()
+  @note = @beef.tag_note(@tag)
   @subtitle = "#{@tag} tag"
   haml :tag
 end
@@ -76,6 +77,7 @@ end
 get '/category/:category' do
   @category = params[:category]
   @beef = get_beef()
+  @note = @beef.category_note(@category)
   @subtitle = "#{@category} category"
   haml :category
 end
