@@ -10,11 +10,11 @@ Today's offending blog is The AV Club, which I generally really like and read al
 
 How the heck did they come up with this embed code for a YouTube video:
 
-`<embed width="425" height="344" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" src="http://www.youtube.com/v/Yww4BLjReEk%26hl=en%26fs=1%26rel=0">`
+    <embed width="425" height="344" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" src="http://www.youtube.com/v/Yww4BLjReEk%26hl=en%26fs=1%26rel=0">
 
 Had they copied the embed code from beneath the YouTube video, they would have gotten this:
 
-`<iframe width="560" height="315" src="http://www.youtube.com/embed/Yww4BLjReEk" frameborder="0" allowfullscreen></iframe>`
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/Yww4BLjReEk" frameborder="0" allowfullscreen></iframe>
 
 I don't know where The AV Club got their embed code, but exhibit A for it's outdatedness is the `pluginspage="http://www.macromedia.com/go/getflashplayer"` parameter. Try going to that page. Because Macromedia doesn't exist anymore, you'll be redirected to Flash's new owner, Adobe. This post is from three days ago; Adobe acquired Macromedia seven years ago.
 
@@ -36,7 +36,7 @@ Which is fine, I guess. It's what I signed up for, using this extension. But c'm
 
 (AbsolutePunk is doing something custom too. Its code looks like this:
 
-`<div align="center"><object width="472" height="389" bgcolor="#f7f7f7"><param name="movie" value="http://www.youtube.com/v/Z-DSFrGnQrk&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="wmode" value="transparent"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Z-DSFrGnQrk&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="472" height="389" bgcolor="#f7f7f7" wmode="transparent"></embed></object></div>`
+    <div align="center"><object width="472" height="389" bgcolor="#f7f7f7"><param name="movie" value="http://www.youtube.com/v/Z-DSFrGnQrk&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="wmode" value="transparent"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Z-DSFrGnQrk&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="472" height="389" bgcolor="#f7f7f7" wmode="transparent"></embed></object></div>
 
 I don't really understand that either, but I don't need to, because it behaves the way I expect it to. It looks like all AbsolutePunk video embeds use the same aspect ratio (472x389) but at least it works with ClickToPlugin.)
 

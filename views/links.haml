@@ -1,0 +1,9 @@
+%h2= "#{@beef.number_of_links} hot links"
+%script{:language => "javascript", :src => "http://pinboard.in/widgets/v1/linkroll?user=#{@beef.pinboard_username}&count=#{@beef.number_of_links}"}
+
+-if @beef.hot_tags.length > 0
+  %div{:style => "display: none"}
+    %ul
+      -@beef.hot_tags.each do |hot_tag|
+        %li#hot_tag= hot_tag
+

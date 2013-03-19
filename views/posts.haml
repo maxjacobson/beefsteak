@@ -1,0 +1,6 @@
+%h2 posts
+%ul
+  -@beef.posts.each do |post|
+    %li
+      %a{:href => post[:url]}= "#{post[:title]}"
+      %span#date= "posted #{post[:diff]}"

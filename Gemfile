@@ -1,6 +1,4 @@
 source :rubygems
-gem 'sinatra', '1.1.0'
-gem 'thin'
+gem 'sinatra'
 gem 'kramdown'
-gem 'sass'
-gem 'rest-open-uri'
+gem 'shotgun'

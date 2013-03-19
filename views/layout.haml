@@ -1,0 +1,36 @@
+!!!
+%html{:lang => "en"}
+%head
+  %meta{:charset => "UTF-8"}/
+  %link{:rel => "stylesheet", :href => "/css/lib/animate.min.css"}
+  %link{:rel => "stylesheet", :href => "/css/lib/prettify.min.css"}
+  %link{:rel => "stylesheet", :href => "/css/style.css"}
+  -if @subtitle.nil?
+    %title= @beef.title
+  -else
+    %title= "#{@subtitle} | #{@beef.title}"
+%body
+  %header
+    %h1= @beef.title.downcase
+    %p
+      by
+      %span#author= @beef.author.downcase
+    #nav
+      %a{:href => "/"} links
+      %a{:href => "/posts"} posts
+      -if @beef.pages.length > 0
+        -@beef.pages.each do |page|
+          %a{:href => page[:url]}= page[:title]
+  %hr
+  .yield{:style => 'display: none'}
+    =yield
+  .buffer{:style => 'height: 1000px'}
+  %hr
+  %footer
+    -if @beef.copyright
+      %p= @beef.copyright_message
+    %p Powered by <a href="http://github.com/maxjacobson/beefsteak/">beefsteak v2</a>
+  %script{:src => "/js/lib/jquery.js"}
+  %script{:src=> "/js/app.js"}
+  %script{:src => "/js/lib/run_prettify.js"}
+

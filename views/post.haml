@@ -1,0 +1,13 @@
+%h2= @post[:title]
+%span#date= "posted #{@post[:diff]} on #{@post[:date].strftime("%b %d, %Y")}"
+.post
+  =@post[:html]
+%p
+  category:
+  %a{:href => "/category/#{@post[:category]}"}= @post[:category].gsub(/\-/,' ')
+
+-if @post[:tags].length > 0
+  %p
+    tags:
+    -@post[:tags].each do |tag|
+      %a{:href => "/tag/#{tag}"}= tag.gsub(/\-/,' ')
