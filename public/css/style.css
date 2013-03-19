@@ -191,23 +191,26 @@ td + td {
 
 /* line 111, ../../assets/sass/style.scss */
 .super_hot {
-  background-color: white;
   margin-bottom: 2em;
   padding: 10px;
   box-shadow: 0 0 5px 5px #888;
 }
 
-/* line 118, ../../assets/sass/style.scss */
+/* line 117, ../../assets/sass/style.scss */
 .footnote {
   vertical-align: super;
   font-size: 65%;
 }
 
-/* line 123, ../../assets/sass/style.scss */
+/* line 122, ../../assets/sass/style.scss */
 .footnotes {
   border-top: dashed black 1px;
 }
 
+/* line 126, ../../assets/sass/style.scss */
+.yield {
+  background-color: white;
+}
 /* line 128, ../../assets/sass/style.scss */
 .yield hr {
   padding: 0;
