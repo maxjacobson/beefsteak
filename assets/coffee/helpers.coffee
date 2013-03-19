@@ -12,10 +12,10 @@ $.fn.anim = (anim) ->
     "fadeOut", "fadeOutUp", "fadeOutDown", "fadeOutLeft", "fadeOutRight",
     "fadeOutUpBig", "fadeOutDownBig", "fadeOutLeftBig", "fadeOutRightBig",
     "bounceOut", "bounceOutDown", "bounceOutUp", "bounceOutLeft", "bounceOutRight",
-    "lightSpeedOut", "rollOut"
+    "lightSpeedOut", "rollOut", "hinge"
   ]
   animations = [
-    "flash", "bounce", "shake", "tada", "swing", "wobble", "wiggle", "pulse", "hinge"
+    "flash", "bounce", "shake", "tada", "swing", "wobble", "wiggle", "pulse"
   ]
   if anim is "random"
     index = Math.floor Math.random()*animations.length

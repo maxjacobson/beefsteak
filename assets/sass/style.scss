@@ -43,8 +43,24 @@ h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+ol {
+  li {
+    list-style-type: decimal;
+  }
+}
+
+ul {
+  li {
+    list-style-type: circle;
+    ul {
+      li {
+        list-style-type: disc;
+      }
+    }
+  }
+}
+
 li {
-  list-style: disc;
   line-height: 1.3em;
   margin-left: 1.5em;
 }

@@ -112,21 +112,34 @@ h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-/* line 46, ../../assets/sass/style.scss */
+/* line 47, ../../assets/sass/style.scss */
+ol li {
+  list-style-type: decimal;
+}
+
+/* line 53, ../../assets/sass/style.scss */
+ul li {
+  list-style-type: circle;
+}
+/* line 56, ../../assets/sass/style.scss */
+ul li ul li {
+  list-style-type: disc;
+}
+
+/* line 63, ../../assets/sass/style.scss */
 li {
-  list-style: disc;
   line-height: 1.3em;
   margin-left: 1.5em;
 }
 
-/* line 52, ../../assets/sass/style.scss */
+/* line 68, ../../assets/sass/style.scss */
 hr {
   padding: 0;
   border: none;
   border-top: medium double #333;
 }
 
-/* line 58, ../../assets/sass/style.scss */
+/* line 74, ../../assets/sass/style.scss */
 img {
   width: 90%;
   padding: 5px;
@@ -134,66 +147,66 @@ img {
   box-shadow: 3px 3px 4px #BEBAD1;
 }
 
-/* line 65, ../../assets/sass/style.scss */
+/* line 81, ../../assets/sass/style.scss */
 pre {
   font-family: "monaco", monospace;
   overflow: auto;
 }
 
-/* line 69, ../../assets/sass/style.scss */
+/* line 85, ../../assets/sass/style.scss */
 code {
   white-space: pre-wrap;
   font-family: "monaco", monospace;
 }
 
-/* line 74, ../../assets/sass/style.scss */
+/* line 90, ../../assets/sass/style.scss */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* line 79, ../../assets/sass/style.scss */
+/* line 95, ../../assets/sass/style.scss */
 th {
   padding: 10px 8px;
   border-bottom: 2px solid black;
 }
 
-/* line 84, ../../assets/sass/style.scss */
+/* line 100, ../../assets/sass/style.scss */
 td {
   padding: 8px;
 }
 
-/* line 89, ../../assets/sass/style.scss */
+/* line 105, ../../assets/sass/style.scss */
 tbody tr:hover td {
   background-color: #C8F1F7;
 }
 
-/* line 95, ../../assets/sass/style.scss */
+/* line 111, ../../assets/sass/style.scss */
 th + th {
   border-left: 2px solid black;
 }
 
-/* line 99, ../../assets/sass/style.scss */
+/* line 115, ../../assets/sass/style.scss */
 td + td {
   border-left: 2px solid black;
 }
 
-/* line 103, ../../assets/sass/style.scss */
+/* line 119, ../../assets/sass/style.scss */
 #nav {
   text-align: right;
 }
 
-/* line 107, ../../assets/sass/style.scss */
+/* line 123, ../../assets/sass/style.scss */
 #date {
   background-color: #FFE2C6;
 }
 
-/* line 111, ../../assets/sass/style.scss */
+/* line 127, ../../assets/sass/style.scss */
 .pin-item {
   margin-bottom: 1em;
 }
 
-/* line 115, ../../assets/sass/style.scss */
+/* line 131, ../../assets/sass/style.scss */
 .super_hot {
   background-color: white;
   margin-bottom: 2em;
@@ -201,18 +214,18 @@ td + td {
   box-shadow: 0 0 5px 5px #888;
 }
 
-/* line 122, ../../assets/sass/style.scss */
+/* line 138, ../../assets/sass/style.scss */
 .footnote {
   vertical-align: super;
   font-size: 65%;
 }
 
-/* line 127, ../../assets/sass/style.scss */
+/* line 143, ../../assets/sass/style.scss */
 .footnotes {
   border-top: dashed black 1px;
 }
 
-/* line 132, ../../assets/sass/style.scss */
+/* line 148, ../../assets/sass/style.scss */
 .yield hr {
   padding: 0;
   margin: 1em 0;
@@ -220,7 +233,7 @@ td + td {
   text-align: center;
   color: black;
 }
-/* line 138, ../../assets/sass/style.scss */
+/* line 154, ../../assets/sass/style.scss */
 .yield hr:after {
   content: "\273F\a0 \273F\a0 \273F";
   position: relative;
@@ -228,7 +241,7 @@ td + td {
 }
 
 @media only screen and (max-width: 450px) {
-  /* line 147, ../../assets/sass/style.scss */
+  /* line 163, ../../assets/sass/style.scss */
   body {
     width: 90%;
     box-shadow: 0;

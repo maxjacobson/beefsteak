@@ -3,35 +3,6 @@
   var delay, puts,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  $(function() {
-    var hot_tags;
-
-    delay(0.5, function() {
-      $(".yield").toggle();
-      $(".yield").anim("enter");
-      return $(".buffer").slideToggle("slow");
-    });
-    $("pre").addClass("prettyprint");
-    hot_tags = [];
-    $("li#hot_tag").each(function() {
-      return hot_tags.push($(this).text());
-    });
-    $(".pin-tag").each(function() {
-      var tag;
-
-      tag = $(this).text();
-      if (__indexOf.call(hot_tags, tag) >= 0) {
-        return $(this).parents(".pin-item").addClass("super_hot");
-      }
-    });
-    return $(".footnote").on("click", function() {
-      var num;
-
-      num = parseInt($(this).text());
-      return $(".footnotes li").eq(num - 1).anim("bounce");
-    });
-  });
-
   puts = function(str) {
     return console.log(str);
   };
@@ -44,8 +15,8 @@
     var animations, blob, entrances, exits, fast, index, slow, speed;
 
     entrances = ["flipInX", "flipInY", "fadeIn", "fadeInUp", "fadeInDown", "fadeInLeft", "fadeInRight", "fadeInUpBig", "fadeInDownBig", "fadeInLeftBig", "fadeInRightBig", "bounceIn", "bounceInDown", "bounceInUp", "bounceInLeft", "bounceInRight", "lightSpeedIn", "rollIn"];
-    exits = ["flipOutX", "flipOutY", "fadeOut", "fadeOutUp", "fadeOutDown", "fadeOutLeft", "fadeOutRight", "fadeOutUpBig", "fadeOutDownBig", "fadeOutLeftBig", "fadeOutRightBig", "bounceOut", "bounceOutDown", "bounceOutUp", "bounceOutLeft", "bounceOutRight", "lightSpeedOut", "rollOut"];
-    animations = ["flash", "bounce", "shake", "tada", "swing", "wobble", "wiggle", "pulse", "hinge"];
+    exits = ["flipOutX", "flipOutY", "fadeOut", "fadeOutUp", "fadeOutDown", "fadeOutLeft", "fadeOutRight", "fadeOutUpBig", "fadeOutDownBig", "fadeOutLeftBig", "fadeOutRightBig", "bounceOut", "bounceOutDown", "bounceOutUp", "bounceOutLeft", "bounceOutRight", "lightSpeedOut", "rollOut", "hinge"];
+    animations = ["flash", "bounce", "shake", "tada", "swing", "wobble", "wiggle", "pulse"];
     if (anim === "random") {
       index = Math.floor(Math.random() * animations.length);
       anim = animations[index];
@@ -74,5 +45,47 @@
       return blob.removeClass("animated " + anim);
     });
   };
+
+  $(function() {
+    var hot_tags;
+
+    delay(0.5, function() {
+      $(".yield").toggle();
+      $(".yield").anim("enter");
+      return $(".buffer").slideToggle("slow");
+    });
+    $("pre").addClass("prettyprint");
+    hot_tags = [];
+    $("li#hot_tag").each(function() {
+      return hot_tags.push($(this).text());
+    });
+    $(".pin-tag").each(function() {
+      var tag;
+
+      tag = $(this).text();
+      if (__indexOf.call(hot_tags, tag) >= 0) {
+        return $(this).parents(".pin-item").addClass("super_hot");
+      }
+    });
+    $(".footnote").on("click", function() {
+      var num;
+
+      num = parseInt($(this).text());
+      return $(".footnotes li").eq(num - 1).anim("random");
+    });
+    return $(".reversefootnote").on("click", function() {
+      var footnote;
+
+      footnote = $(this).attr("href").replace(/fnref/, 'fn');
+      return $("a.footnote").each(function() {
+        var source;
+
+        source = $(this).attr("href");
+        if (footnote === source) {
+          return $(this).parent().parent().anim("random");
+        }
+      });
+    });
+  });
 
 }).call(this);

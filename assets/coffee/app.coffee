@@ -11,4 +11,12 @@ $ ->
     $(this).parents(".pin-item").addClass "super_hot" if tag in hot_tags
   $(".footnote").on "click", ->
     num = parseInt $(this).text()
-    $(".footnotes li").eq(num-1).anim "bounce"
+    $(".footnotes li").eq(num-1).anim "random"
+  $(".reversefootnote").on "click", ->
+    footnote = $(this).attr("href").replace(/fnref/, 'fn')
+    $("a.footnote").each ->
+      source = $(this).attr "href"
+      if footnote is source
+        $(this).parent().parent().anim "random"
+
+

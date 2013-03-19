@@ -122,7 +122,7 @@ class Beefsteak
 
   def secs_to_str (n)
     if n < 0
-      return "in the future...?"
+      return "in the future"
     elsif n < 60
       if n == 1
         return "1 second ago"
