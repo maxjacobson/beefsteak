@@ -25,9 +25,7 @@ class Beefsteak
   end
 
   def posts
-    if @posts.nil? == false
-      return @posts
-    end
+    return @posts if @posts.nil? == false
     @posts = []
     if Dir.exists?("posts")
       filenames = Dir.entries("posts").delete_if{|f| f == "." or f == ".."}
@@ -37,6 +35,32 @@ class Beefsteak
       end
     end
     return @posts.sort_by{|post| post[:date]}.reverse
+  end
+
+  def posts_with_tag(tag)
+    @posts = self.posts if @posts.nil?
+    return @posts.keep_if{|post| post[:tags].include? tag}
+  end
+
+  def posts_with_category(cat)
+    @posts = self.posts if @posts.nil?
+    return @posts.keep_if{|post| post[:category] == cat}
+  end
+  
+  def clouds
+    return {:tags => @tag_cloud, :cats => @cat_cloud} if @tag_cloud.nil? == false and @cat_cloud.nil? == false
+    @posts = self.posts if @posts.nil?
+    @tag_cloud = {}
+    @cat_cloud = {}
+    @posts.each do |post|
+      cat = post[:category]
+      tags = post[:tags]
+      @cat_cloud[cat] = @cat_cloud[cat].nil? ? 1 : @cat_cloud[cat] + 1
+      tags.each do |tag|
+        @tag_cloud[tag] = @tag_cloud[tag].nil? ? 1 : @tag_cloud[tag] + 1
+      end
+    end
+    return {:tags => @tag_cloud.sort_by{|k,v| v}.reverse, :cats => @cat_cloud.sort_by{|k,v| v}.reverse}
   end
 
   def copyright_message

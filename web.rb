@@ -67,15 +67,15 @@ get '/:post' do
 end
 
 get '/tag/:tag' do
-  tag = params[:tag]
+  @tag = params[:tag]
   @beef = get_beef()
-  @subtitle = "#{tag} tag"
+  @subtitle = "#{@tag} tag"
   haml :tag
 end
 
 get '/category/:category' do
-  category = params[:category]
+  @category = params[:category]
   @beef = get_beef()
-  @subtitle = "#{category} category"
+  @subtitle = "#{@category} category"
   haml :category
 end

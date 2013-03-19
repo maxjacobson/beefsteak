@@ -4,3 +4,12 @@
     %li
       %a{:href => post[:url]}= "#{post[:title]}"
       %span#date= "posted #{post[:diff]}"
+%hr
+%h3 category cloud
+%p
+  -@beef.clouds[:cats].each do |k, v|
+    %a{:href => "/category/#{k}"}= "#{k} (#{v})"
+%h3 tag cloud
+%p
+  -@beef.clouds[:tags].each do |k, v|
+    %a{:href => "/tag/#{k}"}= "#{k} (#{v})"

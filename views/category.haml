@@ -1,1 +1,11 @@
-%p category and tag search are currently in the shed
+%h2= "posts with #{@category} category"
+%ul
+  -@beef.posts_with_category(@category).each do |post|
+    %li
+      %a{:href => post[:url]}= "#{post[:title]}"
+      %span#date= "posted #{post[:diff]}"
+%hr
+%h3= "#{@category} posts have these tags"
+%p
+  -@beef.clouds[:tags].each do |k, v|
+    %a{:href => "/tag/#{k}"}= "#{k} (#{v})"

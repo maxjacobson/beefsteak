@@ -2,6 +2,7 @@
 %p#date= "posted #{@post[:diff]} on #{@post[:date].strftime("%b %d, %Y at %I:%m %p")}"
 .post
   =@post[:html]
+%hr
 %p
   category:
   %a{:href => "/category/#{@post[:category]}"}= @post[:category].gsub(/\-/,' ')
