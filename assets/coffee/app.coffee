@@ -1,6 +1,6 @@
 $ ->
   delay 0.5, ->
-    $(".yield").toggle()
+    # $(".yield").toggle()
     $(".yield").anim "enter"
     $(".buffer").slideToggle "slow"
   $("pre").addClass "prettyprint"

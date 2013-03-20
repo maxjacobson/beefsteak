@@ -6,7 +6,6 @@
   $(function() {
     var hot_tags;
     delay(0.5, function() {
-      $(".yield").toggle();
       $(".yield").anim("enter");
       return $(".buffer").slideToggle("slow");
     });
