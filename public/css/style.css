@@ -68,11 +68,6 @@ html {
   background-color: #498274;
 }
 
-/* line 9, ../../assets/sass/style.scss */
-.yield {
-  display: none;
-}
-
 /* line 13, ../../assets/sass/style.scss */
 p, li, ul, h1, h2, h3 {
   margin: 5px 0;
