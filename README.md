@@ -39,11 +39,10 @@ I just rewrote the whole thing and some features need to be re-implemented still
 - [ ] add pinboard search
 - [ ] if the date for something is in the future, don't show it until then
 - [ ] add post feed
-- [ ] re-implement tag and category pages'
-- [ ] add tag and category clouds
+- [x] re-implement tag and category pages'
+- [x] add tag and category clouds
 - [ ] add category and tag feeds, and put them in the head as secondary feeds
 - [x] add analytics
-- [ ] make sure responsive design is good
 
 ## if you're working on the site
 
