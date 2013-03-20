@@ -1,6 +1,6 @@
-%h2= @post[:title]
+%h2.instapaper_title= @post[:title]
 %p#date= "posted #{@post[:diff]} on #{@post[:date].strftime("%b %d, %Y at %I:%m %p")}"
-.post
+.post.instapaper_body
   =@post[:html]
 %hr
 %p
