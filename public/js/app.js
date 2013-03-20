@@ -5,10 +5,6 @@
 
   $(function() {
     var hot_tags;
-    delay(0.5, function() {
-      $(".yield").anim("enter");
-      return $(".buffer").slideToggle("slow");
-    });
     $("pre").addClass("prettyprint");
     hot_tags = [];
     $("li#hot_tag").each(function() {

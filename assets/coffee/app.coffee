@@ -1,8 +1,8 @@
 $ ->
-  delay 0.5, ->
+  # delay 0.5, ->
     # $(".yield").toggle()
-    $(".yield").anim "enter"
-    $(".buffer").slideToggle "slow"
+    # $(".yield").anim "enter"
+    # $(".buffer").slideToggle "slow"
   $("pre").addClass "prettyprint"
   hot_tags = []
   $("li#hot_tag").each -> hot_tags.push $(this).text()
