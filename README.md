@@ -43,6 +43,7 @@ I just rewrote the whole thing and some features need to be re-implemented still
 - [x] add tag and category clouds
 - [ ] add category and tag feeds, and put them in the head as secondary feeds
 - [x] add analytics
+- [ ] allow overriding of the default author for guest posts...? (make sure it reflects in the feed)
 
 ## if you're working on the site
 
