@@ -38,7 +38,7 @@ I just rewrote the whole thing and some features need to be re-implemented still
 - [ ] add post search (allow single or double quotes for quoted queries)
 - [ ] add pinboard search
 - [ ] if the date for something is in the future, don't show it until then
-- [ ] add post feed
+- [x] add post feed
 - [x] re-implement tag and category pages'
 - [x] add tag and category clouds
 - [ ] add category and tag feeds, and put them in the head as secondary feeds
