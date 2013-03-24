@@ -2,16 +2,19 @@
 %rss{:version => "2.0"}
   %channel
     %title= @beef.title
-    %link= "#{@beef.url}/feed"
+    %link= "#{@beef.url}"
     %description= @beef.description
     %language= @beef.language
-    %updated= Time.now.strftime("%Y-%m-%dT%H:%M:%SZ")
+    %pubDate= Time.now.strftime("%a, %d %b %Y %H:%M:%S %Z")
     -if @beef.email.nil? == false
       %webMaster= @beef.email
     -@beef.posts.each do |post|
       %item
         %title= post[:title]
-        %author= @beef.author
+        %author
+          %name= @beef.author
+          %uri= @beef.email
         %link= "#{@beef.url}#{post[:url]}"
-        %updated= post[:date].strftime("%Y-%m-%dT%H:%M:%SZ")
+        %guid= "#{@beef.url}#{post[:url]}"
+        %pubDate= post[:date].strftime("%a, %d %b %Y %H:%M:%S %Z")
         %description= "<![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]>"
