@@ -1,6 +1,6 @@
 # our front end code
 
-This is all jQuery, so we're going to invoke the jQuery method with `$` and send the rest of the code to it. I *this* this will just make it wait for the page to load before doing anything.
+This is all jQuery, so we're going to invoke the jQuery method with `$` and send the rest of the code to it. I *think* this will just make it wait for the page to load before doing anything.
 
     $ ->
 
