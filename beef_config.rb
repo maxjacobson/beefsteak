@@ -16,7 +16,7 @@ def get_beef()
 
   # specifically for the RSS feed
   beef.description = "The devblog of Max Jacobson"
-  beef.url = "http://www.maxjacobson.net"
+  beef.url = "http://www.maxjacobson.net" # with no trailing slash pls
   beef.language = "en-us"
   # beef.email = nil # if you don't want to share an email address
   beef.email = "max@maxjacobson.net"

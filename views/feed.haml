@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+%rss{:version => "2.0"}
+%channel
+  %title= @beef.title
+  %link= "#{@beef.url}/feed"
+  %description= @beef.description
+  %language= @beef.language
+  %updated= Time.now
+  -if @beef.email.nil? == false
+    %webMaster= @beef.email
+  -@posts.each do |post|
+    %item
+      %title= post[:title]
+      %link= "#{@beef.url}/#{post[:filename]}"
+      %description= "<![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]>"
+      %author
+        %name= @beef.author

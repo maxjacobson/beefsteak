@@ -9,6 +9,10 @@ class Beefsteak
     @copyright = true
   end
 
+  def pinboard_feed
+    return "http://feeds.pinboard.in/rss/u:#{@pinboard_username}"
+  end
+
   def pages
     if @pages.nil? == false
       return @pages

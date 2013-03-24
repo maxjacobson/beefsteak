@@ -5,6 +5,9 @@
   %link{:rel => "stylesheet", :href => "/css/lib/animate.min.css"}
   %link{:rel => "stylesheet", :href => "/css/lib/prettify.min.css"}
   %link{:rel => "stylesheet", :href => "/css/style.css"}
+  %link{:rel => "alternate", :type => "application/atom+xml", :title => "Posts feed", :href => "/feed"}
+  %link{:rel => "alternate", :type => "applicaton/atom+xml", :title => "Pinboard links feed", :href => @beef.pinboard_feed}
+
   -if @subtitle.nil?
     %title= @beef.title
   -else
@@ -34,10 +37,15 @@
     =yield
   %hr
   %footer
+    %p
+      Feeds available for
+      %a{:href => "/feed"} posts
+      or for
+      %a{:href => @beef.pinboard_feed} links
     -if @beef.copyright
       %p= @beef.copyright_message
-    %p Powered by <a href="http://github.com/maxjacobson/beefsteak/">beefsteak v2</a>
+    %p Powered by <a href="https://github.com/maxjacobson/beefsteak/">beefsteak v2</a>
+
   %script{:src => "/js/lib/jquery.js"}
   %script{:src=> "/js/app.js"}
   %script{:src => "/js/lib/run_prettify.js"}
-

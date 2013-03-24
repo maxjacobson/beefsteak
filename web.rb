@@ -52,6 +52,13 @@ get '/*.md' do
   end
 end
 
+get '/feed' do
+  @beef = get_beef()
+  @posts = @beef.posts
+  content_type 'application/rss+xml'
+  haml :feed, :layout => false
+end
+
 get '/:post' do
   @beef = get_beef()
   if File.exists?("posts/#{params[:post]}.md") == false
