@@ -52,9 +52,8 @@ get '/*.md' do
   end
 end
 
-get '/posts/feed' do
+get '/feed' do
   @beef = get_beef()
-  @posts = @beef.posts
   content_type 'application/rss+xml'
   haml :feed, :layout => false
 end

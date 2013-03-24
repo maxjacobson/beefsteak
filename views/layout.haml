@@ -5,7 +5,7 @@
   %link{:rel => "stylesheet", :href => "/css/lib/animate.min.css"}
   %link{:rel => "stylesheet", :href => "/css/lib/prettify.min.css"}
   %link{:rel => "stylesheet", :href => "/css/style.css"}
-  %link{:rel => "alternate", :type => "application/atom+xml", :title => "Posts feed", :href => "/posts/feed"}
+  %link{:rel => "alternate", :type => "application/atom+xml", :title => "Posts feed", :href => "/feed"}
   %link{:rel => "alternate", :type => "applicaton/atom+xml", :title => "Pinboard links feed", :href => @beef.pinboard_feed}
 
   -if @subtitle.nil?
@@ -39,7 +39,7 @@
   %footer
     %p
       Feeds available for
-      %a{:href => "/posts/feed"} posts
+      %a{:href => "/feed"} posts
       or for
       %a{:href => @beef.pinboard_feed} links
     -if @beef.copyright

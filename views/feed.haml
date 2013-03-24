@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 %rss{:version => "2.0"}
-%channel
-  %title= @beef.title
-  %link= "#{@beef.url}/feed"
-  %description= @beef.description
-  %language= @beef.language
-  %updated= Time.now
-  -if @beef.email.nil? == false
-    %webMaster= @beef.email
-  -@posts.each do |post|
-    %item
-      %title= post[:title]
-      %link= "#{@beef.url}/#{post[:filename]}"
-      %description= "<![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]>"
-      %author
-        %name= @beef.author
+  %channel
+    %title= @beef.title
+    %link= "#{@beef.url}/feed"
+    %description= @beef.description
+    %language= @beef.language
+    %updated= Time.now.strftime("%Y-%m-%dT%H:%M:%SZ")
+    -if @beef.email.nil? == false
+      %webMaster= @beef.email
+    -@beef.posts.each do |post|
+      %item
+        %title= post[:title]
+        %author= @beef.author
+        %link= "#{@beef.url}#{post[:url]}"
+        %updated= post[:date].strftime("%Y-%m-%dT%H:%M:%SZ")
+        %description= "<![CDATA[#{Kramdown::Document.new(post[:text]).to_html}]]>"
