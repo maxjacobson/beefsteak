@@ -13,7 +13,6 @@
         %title= post[:title]
         %author
           %name= @beef.author
-          %uri= @beef.email
         %link= "#{@beef.url}#{post[:url]}"
         %guid= "#{@beef.url}#{post[:url]}"
         %pubDate= post[:date].strftime("%a, %d %b %Y %H:%M:%S %Z")
