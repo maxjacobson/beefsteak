@@ -9,6 +9,7 @@ Here's me elsewhere on the internet:
 * [twitter](http://twitter.com/maxjacobson)
 * [ADN](http://alpha.app.net/maxjacobson)
 * [instagram](http://instagram.com/maxjacobson)
+* [snapchat](http://snapchat.com/maxjacobson)
 * [facebook](http://facebook.com/jacobson)
 * [github](http://github.com/maxjacobson)
 * [pinboard](http://pinboard.in/u:maxjacobson)

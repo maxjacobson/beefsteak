@@ -69,6 +69,13 @@ li {
   margin-left: 1.5em;
 }
 
+blockquote {
+  margin-left: 2em;
+  padding-left: 5px;
+  border-left: 1px black dotted;
+  background-color: #E6E6E6;
+}
+
 hr {
   padding: 0;
   border: none;
@@ -89,6 +96,7 @@ pre {
 code {
   white-space: pre-wrap;
   font-family: "monaco", monospace;
+  background-color: #D9FEFC;
 }
 
 table {
