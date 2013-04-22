@@ -44,6 +44,7 @@ I just rewrote the whole thing and some features need to be re-implemented still
 - [ ] add category and tag feeds, and put them in the head as secondary feeds
 - [x] add analytics
 - [ ] allow overriding of the default author for guest posts...? (make sure it reflects in the feed)
+- [ ] adjust HTML in feeds so footnote links aren't clickable -- they're relative to the current page and don't work in that context
 
 ## if you're working on the site
 
