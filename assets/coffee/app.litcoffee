@@ -4,6 +4,22 @@ This is all jQuery, so we're going to invoke the jQuery method with `$` and send
 
     $ ->
 
+
+## plugins
+
+I want to use [this plugin](http://css-tricks.com/fluid-width-youtube-videos/) but it's in js, so I've adapted it to CoffeeScript and made it work with all iframes, not just youtube ones. dope plugin chris!
+
+      $allVideos = $("iframe")
+      $fluidEl = $("body")
+      $allVideos.each ->
+        $(this).data('aspectRatio', this.height / this.width).removeAttr('height').removeAttr('width')
+      $(window).resize ->
+        newWidth = $fluidEl.width()
+        $allVideos.each ->
+          $el = $(this)
+          $el.width(newWidth).height(newWidth * $el.data('aspectRatio'))
+      $(window).resize()
+
 ## syntax highlighting
 
 Lets add the "prettyprint" class to all pre objects so that they'll have syntax highlighting. I guess normally you'd hardcode this into the HTML but because I'm generating all my HTML from markdown, I can't. So I'm doing it first thing on page load.

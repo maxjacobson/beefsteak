@@ -4,8 +4,25 @@
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var hot_tags;
+    var $allVideos, $fluidEl, hot_tags;
 
+    $allVideos = $("iframe");
+    $fluidEl = $("body");
+    $allVideos.each(function() {
+      return $(this).data('aspectRatio', this.height / this.width).removeAttr('height').removeAttr('width');
+    });
+    $(window).resize(function() {
+      var newWidth;
+
+      newWidth = $fluidEl.width();
+      return $allVideos.each(function() {
+        var $el;
+
+        $el = $(this);
+        return $el.width(newWidth).height(newWidth * $el.data('aspectRatio'));
+      });
+    });
+    $(window).resize();
     $("pre").addClass("prettyprint");
     hot_tags = [];
     $("li#hot_tag").each(function() {
