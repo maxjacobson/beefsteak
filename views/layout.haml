@@ -44,6 +44,8 @@
       %a{:href => @beef.pinboard_feed} links
     -if @beef.copyright
       %p= @beef.copyright_message
+    -if !@beef.adn_handle.nil?
+      %a{:href => "https://alpha.app.net/#{@beef.adn_handle}", :rel => "me", :style => "display: none"} ADN Verified
     %p Powered by <a href="https://github.com/maxjacobson/beefsteak/">beefsteak v2</a>
 
   %script{:src => "/js/lib/jquery.js"}

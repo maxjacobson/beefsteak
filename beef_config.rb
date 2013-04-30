@@ -14,6 +14,10 @@ def get_beef()
     "max_jacobson", "layabout", "beefsteak"
   ] # links with hot tags are emphasized
 
+  # ADN Verification -- https://account.app.net/settings/verification/
+  # beef.adn_handle = nil # if you don't use adn, uncomment this line
+  beef.adn_handle = "maxjacobson"
+
   # specifically for the RSS feed
   beef.description = "and other exciting findings, by Max Jacobson"
   beef.url = "http://www.maxjacobson.net" # with no trailing slash pls

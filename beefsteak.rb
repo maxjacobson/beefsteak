@@ -1,6 +1,7 @@
 class Beefsteak
   attr_accessor :title, :description, :author,
     :pinboard_username, :number_of_links, :hot_tags,
+    :adn_handle,
     :url, :language, :email,
     :analytics, :analytics_id,
     :copyright
