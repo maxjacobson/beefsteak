@@ -7,7 +7,11 @@ small blog platform for people who, like me,
 * like markdown and use the `.md` file extension
 * write your dates like this: 2013-03-18
 
-Mine is online at <http://www.maxjacobson.net>
+<strike><p></strike>
+
+~~Mine is online at <http://maxjacobson.net>~~
+
+Mine is *not* online because I don't use this anymore, or honestly recommend it. I'm leaving it up because it was a really fun project for me and I learned a lot making it. I very much enjoy and endorse [jekyll](http://jekyllrb.com/) which has the advantage of producing an actually static site.
 
 ## steps:
 
